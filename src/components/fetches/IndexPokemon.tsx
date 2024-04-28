@@ -19,8 +19,7 @@ async function IndexPokemon() {
             index={formatOrder(pokemon.order)}
             title={pokemon.name}
             types={pokemon.types}
-            imageHref={`  https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.id}.png
-            `}
+            imageHref={pokemon.sprites.front_default}
           />
         ); // This will return each item
       })}

@@ -23,7 +23,7 @@ async function page({ params }: { params: { pokemon: string } }) {
   });
 
   function PokemonSprite() {
-    const imageHref = ` https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.id}.png`;
+    const imageHref = pokemon.sprites.front_default;
     const imageHref2 = pokemon.sprites.back_default;
 
     return (
@@ -172,7 +172,7 @@ const PokemonStats: React.FC<Props> = ({ stats, pokemon, pokemonName }) => {
                     <Link
                       target="_blank"
                       href={`https://bulbapedia.bulbagarden.net/wiki/${stat.name}`}
-                      className="mr-8 text-green-800"
+                      className="mr-8 "
                     >
                       {stat.name}
                     </Link>
