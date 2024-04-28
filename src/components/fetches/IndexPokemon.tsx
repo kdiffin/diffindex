@@ -5,12 +5,14 @@ import { Skeleton } from "../ui/skeleton";
 
 async function IndexPokemon() {
   const data = await getAllPokemon();
-  function formatOrder(order: { order: number }) {
+  function formatOrder(order: number) {
     if (order > 999) {
-      return ("000" + pokemon.order).slice(-3);
+      return ("000" + order).slice(-4);
     }
-    return ("00" + pokemon.order).slice(-3);
+
+    return ("00" + order).slice(-3);
   }
+
   const optimizedArray = data?.map((pokemon) => {
     return (
       <PokemonCard

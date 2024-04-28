@@ -84,7 +84,7 @@ async function page({ params }: { params: { pokemon: string } }) {
       <Separator className="mb-3 mt-6" />
       <p className="py-2 text-2xl font-semibold text-muted-foreground">
         #
-        {order > 999
+        {pokemon.order > 999
           ? ("000" + pokemon.order).slice(-4)
           : ("00" + pokemon.order).slice(-3)}
       </p>{" "}

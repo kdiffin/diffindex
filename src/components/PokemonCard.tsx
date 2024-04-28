@@ -63,7 +63,7 @@ const PokemonCard = memo(function PokemonCard({
           <CardContent className="min-w-0  gap-4  pt-8">
             <div className="">
               <div className=" flex w-full flex-none items-center text-sm">
-                <span className="mr-2 text-accent">{index}</span>
+                <span className="mr-2 text-accent">#{index}</span>
               </div>
 
               <div className="relative flex w-full min-w-0 items-center justify-between ">
