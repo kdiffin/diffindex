@@ -62,6 +62,7 @@ async function page({ params }: { params: { pokemon: string } }) {
           <div>
             <Image
               height={250}
+              unoptimized
               width={250}
               src={imageHref2}
               className="  muted-foreground        rounded-t-xl  object-cover"
