@@ -23,8 +23,12 @@ async function page({ params }: { params: { pokemon: string } }) {
   });
 
   function PokemonSprite() {
-    const imageHref = pokemon.sprites.front_default;
-    const imageHref2 = pokemon.sprites.back_default;
+    const imageHref = pokemon.sprites?.front_default
+      ? pokemon.sprites?.front_default
+      : "No Image Yet";
+    const imageHref2 = pokemon.sprites?.back_default
+      ? pokemon.sprites?.back_default
+      : "No Image Yet";
 
     return (
       <div className="max-w-2xl rounded-md bg-background/20 p-8 shadow-md">
@@ -47,7 +51,7 @@ async function page({ params }: { params: { pokemon: string } }) {
               width={250}
               src={imageHref}
               className="      rounded-t-xl  object-cover"
-              alt="a"
+              alt="No Image Yet"
             />
             <p className="text-center italic text-zinc-800">
               {" "}
@@ -60,7 +64,7 @@ async function page({ params }: { params: { pokemon: string } }) {
               width={250}
               src={imageHref2}
               className="  muted-foreground        rounded-t-xl  object-cover"
-              alt="a"
+              alt="No Image Yet"
             />
             <p className="text-center italic text-zinc-800">
               {" "}
