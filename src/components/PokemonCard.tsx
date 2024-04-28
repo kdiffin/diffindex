@@ -1,3 +1,4 @@
+"use client";
 import Image from "next/image";
 import React, { memo } from "react";
 import { Card, CardContent, CardFooter, CardHeader } from "./ui/card";
@@ -11,6 +12,7 @@ import {
   TooltipContent,
 } from "./ui/tooltip";
 import Link from "next/link";
+import { useInView } from "react-intersection-observer";
 
 const PokemonCard = memo(function PokemonCard({
   title,
@@ -25,6 +27,8 @@ const PokemonCard = memo(function PokemonCard({
   index: string;
   abilities: unknown[];
 }) {
+  const [ref, inView, entry] = useInView();
+
   const pokemonTypes = types.map((type, i) => {
     return <Badge className="min-w-fit  uppercase">{type.type.name}</Badge>;
   });
@@ -41,56 +45,63 @@ const PokemonCard = memo(function PokemonCard({
   });
 
   return (
-    <Card className="   w-full rounded-xl border-transparent bg-card/20 font-pixel sm:w-[38%] lg:w-[30%]   ">
-      <CardHeader className=" mb-3  h-64 w-full ">
-        <Image
-          height={300}
-          width={300}
-          src={imageHref}
-          className="  mx-auto h-64 w-full     rounded-t-xl  object-cover"
-          alt="a"
-        />
-      </CardHeader>
+    <Card
+      ref={ref}
+      className=" h-[510px] w-full  overflow-hidden rounded-xl border-transparent bg-card/20 font-pixel sm:w-[38%] lg:w-[30%]   "
+    >
+      {inView ? (
+        <>
+          <CardHeader className=" mb-3  h-64 w-full ">
+            <Image
+              height={300}
+              width={300}
+              src={imageHref}
+              className="  mx-auto h-64 w-full     rounded-t-xl  object-cover"
+              alt="a"
+            />
+          </CardHeader>
+          <CardContent className="min-w-0  gap-4  pt-8">
+            <div className="">
+              <div className=" flex w-full flex-none items-center text-sm">
+                <span className="mr-2 text-accent">{index}</span>
+              </div>
 
-      <CardContent className="min-w-0  gap-4  pt-8">
-        <div className="">
-          <div className=" flex w-full flex-none items-center text-sm">
-            <span className="mr-2 text-accent">{index}</span>
-          </div>
+              <div className="relative flex w-full min-w-0 items-center justify-between ">
+                <TooltipProvider>
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <span className=" relative      line-clamp-1    flex-[0.6]  text-sm">
+                        {pokemonAbilities}
+                      </span>
+                    </TooltipTrigger>
+                    <TooltipContent className="bg-muted">
+                      <span className="        text-xs">
+                        {pokemonAbilities}
+                      </span>
+                    </TooltipContent>
+                  </Tooltip>
+                </TooltipProvider>
 
-          <div className="relative flex w-full min-w-0 items-center justify-between ">
-            <TooltipProvider>
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <span className=" relative      line-clamp-1    flex-[0.6]  text-sm">
-                    {pokemonAbilities}
-                  </span>
-                </TooltipTrigger>
-                <TooltipContent className="bg-muted">
-                  <span className="        text-xs">{pokemonAbilities}</span>
-                </TooltipContent>
-              </Tooltip>
-            </TooltipProvider>
-
-            <div className="ml-auto flex flex-[0.5] items-center justify-end gap-1">
-              {pokemonTypes}
+                <div className="ml-auto flex flex-[0.5] items-center justify-end gap-1">
+                  {pokemonTypes}
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
 
-        <h2 className=" -mx-6  -my-1 mt-2 border-y border-border/20 px-6 py-2 font-pixel text-2xl font-semibold capitalize text-accent ">
-          {title}
-        </h2>
-      </CardContent>
-
-      <CardFooter>
-        <Button asChild className="w-full ">
-          <Link href={`/pokemon/${title}`}>
-            <PokeballSvg /> View
-            <p className="capitalize">&nbsp;{title}</p>
-          </Link>
-        </Button>
-      </CardFooter>
+            <h2 className=" -mx-6  -my-1 mt-2 border-y border-border/20 px-6 py-2 font-pixel text-2xl font-semibold capitalize text-accent ">
+              {title}
+            </h2>
+          </CardContent>
+          <CardFooter>
+            <Button asChild className="w-full ">
+              <Link href={`/pokemon/${title}`}>
+                <PokeballSvg /> View
+                <p className="capitalize">&nbsp;{title}</p>
+              </Link>
+            </Button>
+          </CardFooter>
+        </>
+      ) : null}
     </Card>
   );
 });

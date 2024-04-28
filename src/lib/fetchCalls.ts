@@ -18,7 +18,7 @@ export const fetchPokemon = async ({
 
 export async function getPokemonNamesAndURLs() {
   const res = await fetch(
-    "https://pokeapi.co/api/v2/pokemon?limit=10000&offset=0",
+    "https://pokeapi.co/api/v2/pokemon?limit=20000000&offset=0",
   );
 
   if (!res.ok) {

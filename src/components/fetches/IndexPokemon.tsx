@@ -8,27 +8,22 @@ async function IndexPokemon() {
   function formatOrder(order: { order: number }) {
     return "#" + ("00" + order).slice(-3);
   }
+  const optimizedArray = data?.map((pokemon) => {
+    return (
+      <PokemonCard
+        abilities={pokemon.abilities}
+        key={pokemon.id}
+        index={formatOrder(pokemon.order)}
+        title={pokemon.name}
+        types={pokemon.types}
+        imageHref={
+          pokemon.sprites?.front_default ? pokemon.sprites?.front_default : ""
+        }
+      />
+    ); // This will return each item
+  });
 
-  return (
-    <>
-      {data?.map((pokemon) => {
-        return (
-          <PokemonCard
-            abilities={pokemon.abilities}
-            key={pokemon.id}
-            index={formatOrder(pokemon.order)}
-            title={pokemon.name}
-            types={pokemon.types}
-            imageHref={
-              pokemon.sprites?.front_default
-                ? pokemon.sprites?.front_default
-                : ""
-            }
-          />
-        ); // This will return each item
-      })}
-    </>
-  );
+  return <>{optimizedArray}</>;
 }
 
 export function SkeletonIndex() {
