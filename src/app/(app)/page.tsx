@@ -6,6 +6,7 @@ import IndexPokemon, { SkeletonIndex } from "~/components/fetches/IndexPokemon";
 import { fetchMons } from "./actions";
 
 export default async function HomePage() {
+  // use typescript sdk for this
   const data = await fetchMons({ limit: 20, offset: 0 });
   console.log(data);
 
