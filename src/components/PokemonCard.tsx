@@ -13,6 +13,7 @@ import {
 } from "./ui/tooltip";
 import Link from "next/link";
 import { useInView } from "react-intersection-observer";
+import { type PokeAPI } from "pokeapi-types";
 
 const PokemonCard = memo(function PokemonCard({
   title,
@@ -22,15 +23,19 @@ const PokemonCard = memo(function PokemonCard({
   abilities,
 }: {
   title: string;
-  types: unknown[];
+  types: PokeAPI.PokemonType[];
   imageHref: string;
   index: string;
-  abilities: unknown[];
+  abilities: PokeAPI.PokemonAbility[];
 }) {
   const [ref, inView, entry] = useInView();
 
   const pokemonTypes = types.map((type, i) => {
-    return <Badge className="min-w-fit  uppercase">{type.type.name}</Badge>;
+    return (
+      <Badge key={i} className="min-w-fit  uppercase">
+        {type.type.name}
+      </Badge>
+    );
   });
 
   const pokemonAbilities = abilities.map((ability, i) => {
@@ -47,12 +52,13 @@ const PokemonCard = memo(function PokemonCard({
   return (
     <Card
       ref={ref}
-      className=" h-[510px] w-full  overflow-hidden rounded-xl border-transparent bg-card/20 font-pixel sm:w-[38%] lg:w-[30%]   "
+      className=" h-[510px] w-full  overflow-hidden rounded-xl border-transparent bg-card/20 font-pixel sm:w-[40%] lg:w-[30%]   "
     >
       {inView ? (
         <>
           <CardHeader className=" mb-3  h-64 w-full ">
             <Image
+              unoptimized
               height={300}
               width={300}
               src={imageHref}
@@ -63,7 +69,9 @@ const PokemonCard = memo(function PokemonCard({
           <CardContent className="min-w-0  gap-4  pt-8">
             <div className="">
               <div className=" flex w-full flex-none items-center text-sm">
-                <span className="mr-2 text-accent">#{index}</span>
+                <span className="mr-2 font-sans font-semibold text-accent">
+                  #{index}
+                </span>
               </div>
 
               <div className="relative flex w-full min-w-0 items-center justify-between ">

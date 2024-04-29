@@ -1,4 +1,4 @@
-import { Github, GithubIcon, LucideGithub, Menu } from "lucide-react";
+import { LucideGithub, Menu } from "lucide-react";
 import Link from "next/link";
 import React from "react";
 import { Button } from "./ui/button";
@@ -11,7 +11,7 @@ function Navbar() {
         DiffinDex
       </Link>
 
-      <div className="flex hidden items-center gap-2 px-3 sm:block">
+      <div className="hidden items-center gap-2 px-3 sm:flex">
         <span className="pointer-events-none select-none text-accent"> / </span>
         <Button asChild variant="link" className="mt-1   px-0">
           <Link href="/home" className=" text-xl">

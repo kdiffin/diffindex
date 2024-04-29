@@ -1,10 +1,12 @@
-export const fetchPokemon = async ({
-  limit = 34,
-  offset,
+import { type PokeAPI } from "pokeapi-types";
+
+export async function getPokemonNamesAndURLs({
+  limit = 2000000000,
+  offset = 0,
 }: {
-  limit: number;
-  offset: number;
-}) => {
+  limit?: number;
+  offset?: number;
+}) {
   const res = await fetch(
     `https://pokeapi.co/api/v2/pokemon?limit=${limit}&offset=${offset}`,
   );
@@ -13,20 +15,7 @@ export const fetchPokemon = async ({
     throw new Error("Failed to fetch data");
   }
 
-  return res.json() as Promise<object>;
-};
-
-export async function getPokemonNamesAndURLs() {
-  const res = await fetch(
-    "https://pokeapi.co/api/v2/pokemon?limit=20000000&offset=0",
-  );
-
-  if (!res.ok) {
-    // This will activate the closest `error.js` Error Boundary
-    throw new Error("Failed to fetch data");
-  }
-
-  return res.json() as Promise<object>;
+  return (await res.json()) as Promise<PokeAPI.NamedAPIResource>;
 }
 
 export async function getPokemon(pokemonURL: string) {
@@ -37,14 +26,14 @@ export async function getPokemon(pokemonURL: string) {
     throw new Error("Failed to fetch data");
   }
 
-  return res.json() as Promise<object>;
+  return res.json() as Promise<PokeAPI.Pokemon>;
 }
 
-export async function getAllPokemon() {
-  const data = await getPokemonNamesAndURLs();
+export async function getAllPokemon(): Promise<PokeAPI.Pokemon[]> {
+  const data = await getPokemonNamesAndURLs({});
 
   if ("results" in data && Array.isArray(data.results)) {
-    const pokemons: object[] = await Promise.all(
+    const pokemons = await Promise.all(
       data.results.map(async (item: { url: string }) => {
         const pokemonAttributes = await getPokemon(item.url);
         return pokemonAttributes;

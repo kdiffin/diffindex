@@ -6,6 +6,7 @@ import { Separator } from "../../../../components/ui/separator";
 import { capitalizeFirstLetter } from "~/lib/utils";
 import Link from "next/link";
 import Image from "next/image";
+import PokemonMoves from "~/components/PokemonMoves";
 
 async function page({ params }: { params: { pokemon: string } }) {
   // LEFT TO DO: ADD EVOLUTION,  ADD TYPE EFFECTIVENESS, ADD FORMS, ADD MOVES, ADD POKEDEX ENTRIES
@@ -24,7 +25,7 @@ async function page({ params }: { params: { pokemon: string } }) {
 
   function PokemonSprite() {
     const imageHref = pokemon.sprites?.front_default
-      ? pokemon.sprites?.front_default
+      ? pokemon.sprites.front_default
       : "No Image Yet";
     const imageHref2 = pokemon.sprites?.back_default
       ? pokemon.sprites?.back_default
@@ -115,14 +116,6 @@ async function page({ params }: { params: { pokemon: string } }) {
     </div>
   );
 }
-
-const PokemonMoves: React.FC<Props> = ({ moves, pokemon, pokemonName }) => {
-  return (
-    <div className="h-full rounded-md bg-background/20 p-8 shadow-md lg:col-span-2">
-      <h2 className=" text-2xl font-semibold">{pokemonName}'s Moves</h2>
-    </div>
-  );
-};
 
 const PokemonStats: React.FC<Props> = ({ stats, pokemon, pokemonName }) => {
   return (

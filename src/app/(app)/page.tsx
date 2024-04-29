@@ -3,7 +3,6 @@ import Link from "next/link";
 import { Suspense } from "react";
 import PokemonCard from "~/components/PokemonCard";
 import IndexPokemon, { SkeletonIndex } from "~/components/fetches/IndexPokemon";
-import { fetchMons } from "./actions";
 
 export default async function HomePage() {
   // use typescript sdk for this
