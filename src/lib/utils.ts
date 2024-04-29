@@ -11,3 +11,11 @@ export function capitalizeFirstLetter(str: string): string {
   // Capitalize the first letter and concatenate it with the rest of the string
   return str.charAt(0).toUpperCase() + str.slice(1);
 }
+
+export function formatOrder(id: number) {
+  if (id > 999) {
+    return ("000" + id).slice(-4);
+  }
+
+  return ("00" + id).slice(-3);
+}

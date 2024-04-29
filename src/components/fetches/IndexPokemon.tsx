@@ -2,23 +2,17 @@ import React from "react";
 import { getAllPokemon } from "~/lib/fetchCalls";
 import PokemonCard from "../PokemonCard";
 import { Skeleton } from "../ui/skeleton";
+import { formatOrder } from "~/lib/utils";
 
 async function IndexPokemon() {
   const data = await getAllPokemon();
-  function formatOrder(order: number) {
-    if (order > 999) {
-      return ("000" + order).slice(-4);
-    }
-
-    return ("00" + order).slice(-3);
-  }
 
   const optimizedArray = data?.map((pokemon) => {
     return (
       <PokemonCard
         abilities={pokemon.abilities}
         key={pokemon.id}
-        index={formatOrder(pokemon.order)}
+        index={formatOrder(pokemon.id)}
         title={pokemon.name}
         types={pokemon.types}
         imageHref={

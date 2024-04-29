@@ -3,7 +3,7 @@ import React from "react";
 import { Badge } from "~/components/ui/badge";
 import { getPokemon } from "~/lib/fetchCalls";
 import { Separator } from "../../../../components/ui/separator";
-import { capitalizeFirstLetter } from "~/lib/utils";
+import { capitalizeFirstLetter, formatOrder } from "~/lib/utils";
 import Link from "next/link";
 import Image from "next/image";
 import PokemonMoves from "~/components/PokemonMoves";
@@ -84,10 +84,7 @@ async function page({ params }: { params: { pokemon: string } }) {
       <h1 className="text-5xl font-extrabold  capitalize">{pokemonName}</h1>
       <Separator className="mb-3 mt-6" />
       <p className="py-2 text-2xl font-semibold text-muted-foreground">
-        #
-        {pokemon.order > 999
-          ? ("000" + pokemon.order).slice(-4)
-          : ("00" + pokemon.order).slice(-3)}
+        #{formatOrder(pokemon.id)}
       </p>{" "}
       <div className="flex  items-center gap-1">
         {pokemon.types.map((type) => {
