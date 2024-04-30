@@ -1,4 +1,3 @@
-/* eslint-disable react/no-unescaped-entities */
 import React from "react";
 import { Badge } from "~/components/ui/badge";
 import { getPokemon } from "~/lib/fetchCalls";

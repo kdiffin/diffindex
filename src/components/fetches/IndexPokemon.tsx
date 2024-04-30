@@ -9,7 +9,7 @@ import { Search } from "lucide-react";
 import { Input } from "../ui/input";
 import ClientCards from "../ClientCards";
 
-async function IndexPokemon({ searchParams }: { searchParams: string }) {
+async function IndexPokemon() {
   const data = await getAllPokemon();
 
   return (
@@ -17,7 +17,10 @@ async function IndexPokemon({ searchParams }: { searchParams: string }) {
       <Suspense fallback={<SearchIndexFallback />}>
         <SearchIndex />
       </Suspense>
-      <ClientCards cards={data} />/
+
+      <Suspense>
+        <ClientCards cards={data} />/
+      </Suspense>
     </>
   );
 }
