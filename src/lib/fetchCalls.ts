@@ -1,7 +1,7 @@
 import { type PokeAPI } from "pokeapi-types";
 
 export async function getPokemonNamesAndURLs({
-  limit = 100,
+  limit = 10000000,
   offset = 0,
 }: {
   limit?: number;
