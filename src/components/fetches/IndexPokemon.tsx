@@ -14,13 +14,7 @@ async function IndexPokemon() {
 
   return (
     <>
-      <Suspense fallback={<SearchIndexFallback />}>
-        <SearchIndex />
-      </Suspense>
-
-      <Suspense>
-        <ClientCards cards={data} />/
-      </Suspense>
+      <ClientCards cards={data} />/
     </>
   );
 }
@@ -29,7 +23,6 @@ export function SkeletonIndex() {
   const skeletonArray = new Array(20).fill("");
   return (
     <>
-      <SearchIndexFallback />
       {skeletonArray.map((item, i) => {
         return (
           <Skeleton

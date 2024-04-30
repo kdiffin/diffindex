@@ -1,7 +1,8 @@
+import "server-only";
 import { type PokeAPI } from "pokeapi-types";
 
 export async function getPokemonNamesAndURLs({
-  limit = 10000000,
+  limit = 100,
   offset = 0,
 }: {
   limit?: number;
@@ -15,7 +16,7 @@ export async function getPokemonNamesAndURLs({
     throw new Error("Failed to fetch data");
   }
 
-  return (await res.json()) as Promise<PokeAPI.NamedAPIResource>;
+  return res.json() as Promise<PokeAPI.NamedAPIResource>;
 }
 
 export async function getPokemon(pokemonURL: string) {
