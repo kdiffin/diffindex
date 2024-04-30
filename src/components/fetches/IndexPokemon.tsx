@@ -17,7 +17,7 @@ async function IndexPokemon({ searchParams }: { searchParams: string }) {
       <Suspense fallback={<SearchIndexFallback />}>
         <SearchIndex />
       </Suspense>
-      <ClientCards cards={data} />
+      <ClientCards cards={data} />/
     </>
   );
 }
