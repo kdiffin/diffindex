@@ -9,17 +9,20 @@ import { useDebouncedCallback } from "use-debounce";
 
 function SearchIndex() {
   const searchParams = useSearchParams();
-  const router = useRouter();
   const inputRef = useRef<HTMLInputElement>(null);
+
+  function updateSorting(sortOrder: string) {
+    const params = new URLSearchParams(searchParams.toString());
+    params.set("q", sortOrder);
+    window.history.replaceState(null, "", `?${params.toString()}`);
+  }
 
   return (
     <div className="flex w-full items-center justify-center">
       <form
         onSubmit={(e) => {
           e.preventDefault();
-          router.push(
-            `/search/${inputRef.current ? inputRef.current.value : ""}`,
-          );
+          updateSorting(inputRef.current ? inputRef.current.value : "");
         }}
         className="  flex w-full max-w-screen-lg items-center gap-1  rounded-lg bg-background/20 px-6   "
       >
