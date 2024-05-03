@@ -6,7 +6,11 @@ import { getAllPokemon } from "~/lib/fetchCalls";
 async function page() {
   const cards = await getAllPokemon();
 
-  return <ClientCards cards={cards} />;
+  return (
+    <Suspense fallback={<SkeletonIndex />}>
+      <ClientCards cards={cards} />
+    </Suspense>
+  );
 }
 
 export default page;
