@@ -2,7 +2,7 @@ import "server-only";
 import { type PokeAPI } from "pokeapi-types";
 
 export async function getPokemonNamesAndURLs({
-  limit = 100,
+  limit = 1000,
   offset = 0,
 }: {
   limit?: number;
