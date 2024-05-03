@@ -1,17 +1,20 @@
 "use client";
 import { matchSorter } from "match-sorter";
-import { PokeAPI } from "pokeapi-types";
-import React, { Suspense } from "react";
+import { type PokeAPI } from "pokeapi-types";
+import React, { Suspense, useMemo, useState } from "react";
 import PokemonCard from "./PokemonCard";
 import { formatOrder } from "~/lib/utils";
-import { useSearchParams } from "next/navigation";
+import { useParams, useSearchParams } from "next/navigation";
 import { useDebounce, useDebouncedCallback } from "use-debounce";
 
 function ClientCards({ cards }: { cards: PokeAPI.Pokemon[] }) {
-  const params = useSearchParams();
-  const filteredArray = matchSorter(cards, params.get("search") ?? "", {
-    keys: ["name"],
-  });
+  const params = useParams<{ id: string }>();
+
+  const filteredArray = useMemo(() => {
+    return cards.filter((pokemon) =>
+      pokemon.name.toLowerCase().includes(params.id ?? ""),
+    );
+  }, [cards, params.id]);
 
   const optimizedArray = filteredArray.map((pokemon) => {
     return (

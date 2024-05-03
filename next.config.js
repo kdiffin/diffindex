@@ -25,6 +25,11 @@ const config = {
   typescript: {
     ignoreBuildErrors: true,
   },
+  logging: {
+    fetches: {
+      fullUrl: true,
+    },
+  },
 };
 
 export default config;
