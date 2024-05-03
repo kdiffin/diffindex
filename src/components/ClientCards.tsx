@@ -8,13 +8,14 @@ import { useParams, useSearchParams } from "next/navigation";
 import { useDebounce, useDebouncedCallback } from "use-debounce";
 
 function ClientCards({ cards }: { cards: PokeAPI.Pokemon[] }) {
-  const params = useParams<{ id: string }>();
+  const params = useSearchParams();
+  const searchParams = params.get("q");
 
   const filteredArray = useMemo(() => {
     return cards.filter((pokemon) =>
-      pokemon.name.toLowerCase().includes(params.id ?? ""),
+      pokemon.name.toLowerCase().includes(searchParams ?? ""),
     );
-  }, [cards, params.id]);
+  }, [cards, searchParams]);
 
   const optimizedArray = filteredArray.map((pokemon) => {
     return (

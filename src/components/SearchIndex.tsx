@@ -18,7 +18,7 @@ function SearchIndex() {
         onSubmit={(e) => {
           e.preventDefault();
           router.push(
-            `/search/${inputRef.current ? inputRef.current.value : ""}`,
+            `/search?q=${inputRef.current ? inputRef.current.value : ""}`,
           );
         }}
         className="  flex w-full max-w-screen-lg items-center gap-1  rounded-lg bg-background/20 px-6   "
