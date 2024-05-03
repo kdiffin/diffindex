@@ -14,22 +14,7 @@ async function IndexPokemon() {
 
   return (
     <>
-      {data.map((pokemon) => {
-        return (
-          <PokemonCard
-            abilities={pokemon.abilities}
-            key={pokemon.id}
-            index={formatOrder(pokemon.id)}
-            title={pokemon.name}
-            types={pokemon.types}
-            imageHref={
-              pokemon.sprites?.front_default
-                ? pokemon.sprites?.front_default
-                : ""
-            }
-          />
-        ); // This will return each item
-      })}
+      <ClientCards cards={[...data]} />
     </>
   );
 }

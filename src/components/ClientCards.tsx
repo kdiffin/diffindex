@@ -10,7 +10,6 @@ import { useDebounce, useDebouncedCallback } from "use-debounce";
 function ClientCards({ cards }: { cards: PokeAPI.Pokemon[] }) {
   const params = useSearchParams();
   const searchParams = params.get("q");
-
   const filteredArray = useMemo(() => {
     return cards.filter((pokemon) =>
       pokemon.name.toLowerCase().includes(searchParams ?? ""),

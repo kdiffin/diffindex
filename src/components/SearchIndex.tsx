@@ -9,11 +9,14 @@ import { useDebouncedCallback } from "use-debounce";
 
 function SearchIndex() {
   const searchParams = useSearchParams();
+  const pathname = usePathname();
+  const router = useRouter();
+
   const inputRef = useRef<HTMLInputElement>(null);
 
-  function updateSorting(sortOrder: string) {
+  function updateSorting(searchValue: string) {
     const params = new URLSearchParams(searchParams.toString());
-    params.set("q", sortOrder);
+    params.set("q", searchValue);
     window.history.replaceState(null, "", `?${params.toString()}`);
   }
 
@@ -30,7 +33,7 @@ function SearchIndex() {
 
         <Input
           ref={inputRef}
-          defaultValue={searchParams.get("search")?.toString()}
+          defaultValue={searchParams.get("q")?.toString()}
           className=" border-0 bg-transparent py-6 placeholder:text-white "
           placeholder="Search..."
         />
