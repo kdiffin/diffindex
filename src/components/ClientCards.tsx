@@ -1,6 +1,6 @@
 "use client";
 import { matchSorter } from "match-sorter";
-import { PokeAPI } from "pokeapi-types";
+import { type PokeAPI } from "pokeapi-types";
 import React, { Suspense, useMemo, useState } from "react";
 import PokemonCard from "./PokemonCard";
 import { formatOrder } from "~/lib/utils";
