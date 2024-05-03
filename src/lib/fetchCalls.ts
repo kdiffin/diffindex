@@ -31,7 +31,7 @@ export async function getPokemon(pokemonURL: string) {
 }
 
 export async function getAllPokemon(): Promise<PokeAPI.Pokemon[]> {
-  const data = await getPokemonNamesAndURLs({});
+  const data = await getPokemonNamesAndURLs();
 
   if ("results" in data && Array.isArray(data.results)) {
     const pokemons = await Promise.all(
