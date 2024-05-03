@@ -14,13 +14,22 @@ async function IndexPokemon() {
 
   return (
     <>
-      <Suspense fallback={<SearchIndexFallback />}>
-        <SearchIndex />
-      </Suspense>
-
-      <Suspense>
-        <ClientCards cards={data} />/
-      </Suspense>
+      {data.map((pokemon) => {
+        return (
+          <PokemonCard
+            abilities={pokemon.abilities}
+            key={pokemon.id}
+            index={formatOrder(pokemon.id)}
+            title={pokemon.name}
+            types={pokemon.types}
+            imageHref={
+              pokemon.sprites?.front_default
+                ? pokemon.sprites?.front_default
+                : ""
+            }
+          />
+        ); // This will return each item
+      })}
     </>
   );
 }
@@ -29,7 +38,6 @@ export function SkeletonIndex() {
   const skeletonArray = new Array(20).fill("");
   return (
     <>
-      <SearchIndexFallback />
       {skeletonArray.map((item, i) => {
         return (
           <Skeleton

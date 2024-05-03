@@ -1,14 +1,8 @@
 import { type PokeAPI } from "pokeapi-types";
 
-export async function getPokemonNamesAndURLs({
-  limit = 10000000,
-  offset = 0,
-}: {
-  limit?: number;
-  offset?: number;
-}) {
+export async function getPokemonNamesAndURLs() {
   const res = await fetch(
-    `https://pokeapi.co/api/v2/pokemon?limit=${limit}&offset=${offset}`,
+    `https://pokeapi.co/api/v2/pokemon?limit=100&offset=0`,
   );
   if (!res.ok) {
     // This will activate the closest `error.js` Error Boundary
@@ -30,7 +24,7 @@ export async function getPokemon(pokemonURL: string) {
 }
 
 export async function getAllPokemon(): Promise<PokeAPI.Pokemon[]> {
-  const data = await getPokemonNamesAndURLs({});
+  const data = await getPokemonNamesAndURLs();
 
   if ("results" in data && Array.isArray(data.results)) {
     const pokemons = await Promise.all(

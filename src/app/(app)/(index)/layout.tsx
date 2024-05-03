@@ -1,8 +1,10 @@
 import "~/styles/globals.css";
+
 import { Inter, Pixelify_Sans as Pixel } from "next/font/google";
 import Navbar from "~/components/Navbar";
-import { AppProgressBar as ProgressBar } from "next-nprogress-bar";
-import Providers from "~/components/Providers";
+import { Suspense } from "react";
+import SearchIndex from "~/components/SearchIndex";
+import { SearchIndexFallback } from "~/components/fetches/IndexPokemon";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -26,16 +28,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body
-        className={`relative min-h-screen font-sans  ${inter.variable} ${pixel.variable}`}
-      >
-        <Providers>
-          <Navbar />
+    <main className="pokemon-bg container  flex h-full flex-wrap  items-center justify-center gap-12  py-12   ">
+      <Suspense fallback={<SearchIndexFallback />}>
+        <SearchIndex />
+      </Suspense>
 
-          {children}
-        </Providers>
-      </body>
-    </html>
+      {children}
+    </main>
   );
 }
