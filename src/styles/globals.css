@@ -37,10 +37,41 @@
 
   body {
     background-image: url("../../public/wallpaper.jpg");
-    background-size: cover;
     background-repeat: no-repeat;
-    background-attachment: fixed;
-    backdrop-filter: brightness(60%) blur(5px);
+    background-size: cover;
+  }
+
+  body:before {
+    content: "";
+    position: fixed;
+    z-index: -2;
+    display: block;
+    top: 0px;
+    left: 0px;
+    bottom: 0px;
+    right: 0px;
+    background-position: center top;
+    background-image: url("../../public/wallpaper.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
+  body:after {
+    content: "";
+    position: fixed;
+    z-index: -1;
+    display: block;
+    top: 0px;
+    left: 0px;
+    bottom: 0px;
+    right: 0px;
+    background-position: center top;
+    background-color: #00000060;
+    background-repeat: no-repeat;
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+
+    background-size: cover;
   }
 
   .dark {

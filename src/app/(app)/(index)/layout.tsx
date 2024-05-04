@@ -3,8 +3,8 @@ import "~/styles/globals.css";
 import { Inter, Pixelify_Sans as Pixel } from "next/font/google";
 import Navbar from "~/components/Navbar";
 import { Suspense } from "react";
-import SearchIndex from "~/components/SearchIndex";
-import { SearchIndexFallback } from "~/components/fetches/PokemonGrid";
+import SearchPokemon from "~/components/SearchPokemon";
+import { SearchPokemonFallback } from "~/components/fetches/PokemonGrid";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -28,9 +28,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <main className="pokemon-bg container  flex h-full flex-wrap  items-center justify-center gap-12  py-12   ">
-      <Suspense fallback={<SearchIndexFallback />}>
-        <SearchIndex />
+    <main className="pokemon-bg container  flex h-full flex-wrap   justify-center gap-12  py-12   ">
+      <Suspense fallback={<SearchPokemonFallback />}>
+        <SearchPokemon />
       </Suspense>
 
       {children}

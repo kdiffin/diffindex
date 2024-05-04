@@ -1,5 +1,5 @@
 "use client";
-
+import { toast, useToast } from "~/components/ui/use-toast";
 import React, { useRef } from "react";
 import { Input } from "./ui/input";
 import { Search } from "lucide-react";
@@ -7,25 +7,35 @@ import { usePathname, useSearchParams } from "next/navigation";
 import { useRouter } from "next-nprogress-bar";
 import { useDebouncedCallback } from "use-debounce";
 
-function SearchIndex() {
+function SearchPokemon() {
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const router = useRouter();
 
   const inputRef = useRef<HTMLInputElement>(null);
 
-  function updateSorting(searchValue: string) {
-    router.push("/search/" + searchValue);
+  function updateSearch(searchValue: string) {
+    if (searchValue.length > 1) {
+      router.push("/search/" + searchValue.toLowerCase());
+      return;
+    }
+
+    console.log(searchValue.length);
+
+    toast({
+      title: "Not specific enough",
+      description: "Please enter in more than 1 character to search.",
+    });
   }
 
   return (
-    <div className="flex w-full items-center justify-center">
+    <div className="sticky top-10 z-40 flex w-full items-center justify-center">
       <form
         onSubmit={(e) => {
           e.preventDefault();
-          updateSorting(inputRef.current ? inputRef.current.value : "");
+          updateSearch(inputRef.current ? inputRef.current.value : "");
         }}
-        className="  flex w-full max-w-screen-lg items-center gap-1  rounded-lg bg-background/20 px-6   "
+        className="  flex w-full  max-w-screen-lg items-center gap-1 rounded-lg bg-background/40  px-6 backdrop-blur-3xl   "
       >
         <Search className="text-white" size={18} />
 
@@ -41,4 +51,4 @@ function SearchIndex() {
   );
 }
 
-export default SearchIndex;
+export default SearchPokemon;

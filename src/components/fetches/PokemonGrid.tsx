@@ -8,7 +8,7 @@ import PokemonCard from "../PokemonCard";
 import { Skeleton } from "../ui/skeleton";
 import { formatOrder } from "~/lib/utils";
 import { matchSorter } from "match-sorter";
-import SearchIndex from "../SearchIndex";
+import SearchPokemon from "../SearchPokemon";
 import { Search } from "lucide-react";
 import { Input } from "../ui/input";
 
@@ -89,7 +89,7 @@ export function PokemonCardsSkeleton() {
   );
 }
 
-export function SearchIndexFallback() {
+export function SearchPokemonFallback() {
   return (
     <div className="flex w-full items-center justify-center">
       <div className="  flex w-full max-w-screen-lg items-center gap-1  rounded-lg bg-background/20 px-6   ">

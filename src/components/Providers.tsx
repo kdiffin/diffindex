@@ -1,6 +1,7 @@
 "use client";
 
 import { AppProgressBar as ProgressBar } from "next-nprogress-bar";
+import { Toaster } from "./ui/toaster";
 
 const Providers = ({ children }: { children: React.ReactNode }) => {
   return (
@@ -12,6 +13,7 @@ const Providers = ({ children }: { children: React.ReactNode }) => {
         color="#fffd00"
         options={{ showSpinner: false }}
       />
+      <Toaster />
     </>
   );
 };

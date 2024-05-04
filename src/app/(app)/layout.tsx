@@ -28,7 +28,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`relative min-h-screen font-sans  ${inter.variable} ${pixel.variable}`}
+        className={`relative min-h-screen bg-black font-sans  ${inter.variable} ${pixel.variable}`}
       >
         <Providers>
           <Navbar />
