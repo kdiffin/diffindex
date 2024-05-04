@@ -9,7 +9,7 @@ const Providers = ({ children }: { children: React.ReactNode }) => {
       {children}
       <ProgressBar
         height="4px"
-        delay={0}
+        delay={500}
         color="#fffd00"
         options={{ showSpinner: false }}
       />
