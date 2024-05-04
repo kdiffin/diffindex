@@ -1,9 +1,12 @@
-import React from "react";
-import { SearchComponent } from "~/components/fetches/PokemonGrid";
+import React, { Suspense } from "react";
+import IndexPokemon, {
+  SearchComponent,
+} from "~/components/fetches/PokemonGrid";
 import { getAllPokemon } from "~/lib/fetchCalls";
+import ClientSearch from "~/components/REAL";
 
-async function page({ params }: { params: { id?: string } }) {
-  return <SearchComponent searchParams={params.id ?? ""} />;
+async function page() {
+  return <IndexPokemon />;
 }
 
 export default page;
