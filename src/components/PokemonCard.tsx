@@ -44,7 +44,7 @@ const PokemonCard = memo(function PokemonCard({
         <Button variant={"link"} className="min-w-fit px-1 pl-0 uppercase ">
           {ability.ability.name}
         </Button>
-        <span className="text-primary-foreground "> / &nbsp;</span>
+        <span className="text-foreground "> / &nbsp;</span>
       </>
     );
   });
