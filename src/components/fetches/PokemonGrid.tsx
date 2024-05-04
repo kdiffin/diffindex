@@ -1,5 +1,9 @@
 import React, { Suspense } from "react";
-import { getAllPokemon } from "~/lib/fetchCalls";
+import {
+  getAllPokemon,
+  getPokemon,
+  getPokemonNamesAndURLs,
+} from "~/lib/fetchCalls";
 import PokemonCard from "../PokemonCard";
 import { Skeleton } from "../ui/skeleton";
 import { formatOrder } from "~/lib/utils";
@@ -8,7 +12,7 @@ import SearchIndex from "../SearchIndex";
 import { Search } from "lucide-react";
 import { Input } from "../ui/input";
 
-async function IndexPokemon() {
+async function IndexPokemonCards() {
   const data = await getAllPokemon();
 
   return (
@@ -33,18 +37,25 @@ async function IndexPokemon() {
   );
 }
 
-export async function SearchComponent({
+export async function SearchPokemonCards({
   searchParams,
 }: {
   searchParams: string;
 }) {
-  const data = await getAllPokemon();
+  const pokemonNames = await getPokemonNamesAndURLs();
 
-  const filteredArray = data.filter((pokemon) =>
+  const filteredFetches = pokemonNames.results.filter((pokemon) =>
     pokemon.name.toLowerCase().includes(searchParams ?? ""),
   );
 
-  const optimizedArray = filteredArray.map((pokemon) => {
+  const pokemons = await Promise.all(
+    filteredFetches.map(async (item: { url: string }) => {
+      const pokemonAttributes = await getPokemon(item.url);
+      return pokemonAttributes;
+    }),
+  );
+
+  const optimizedArray = pokemons.map((pokemon) => {
     return (
       <PokemonCard
         abilities={pokemon.abilities}
@@ -62,7 +73,7 @@ export async function SearchComponent({
   return <>{optimizedArray}</>;
 }
 
-export function SkeletonIndex() {
+export function PokemonCardsSkeleton() {
   const skeletonArray = new Array(20).fill("");
   return (
     <>
@@ -94,4 +105,4 @@ export function SearchIndexFallback() {
   );
 }
 
-export default IndexPokemon;
+export default IndexPokemonCards;

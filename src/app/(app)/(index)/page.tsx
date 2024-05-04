@@ -1,8 +1,8 @@
 import { Suspense } from "react";
 import SearchIndex from "~/components/SearchIndex";
-import IndexPokemon, {
+import IndexPokemonCards, {
   SearchIndexFallback,
-  SkeletonIndex,
+  PokemonCardsSkeleton,
 } from "~/components/fetches/PokemonGrid";
 
 export default async function HomePage({
@@ -11,8 +11,8 @@ export default async function HomePage({
   searchParams?: string;
 }) {
   return (
-    <Suspense fallback={<SkeletonIndex />}>
-      <IndexPokemon />
+    <Suspense fallback={<PokemonCardsSkeleton />}>
+      <IndexPokemonCards />
     </Suspense>
   );
 }

@@ -11,7 +11,7 @@ export async function getPokemonNamesAndURLs() {
     throw new Error("Failed to fetch data");
   }
 
-  return res.json() as Promise<PokeAPI.NamedAPIResource>;
+  return res.json() as Promise<PokeAPI.NamedAPIResourceList>;
 }
 
 export async function getPokemon(pokemonURL: string) {
@@ -28,18 +28,12 @@ export async function getPokemon(pokemonURL: string) {
 export async function getAllPokemon(): Promise<PokeAPI.Pokemon[]> {
   const data = await getPokemonNamesAndURLs();
 
-  if ("results" in data && Array.isArray(data.results)) {
-    const pokemons = await Promise.all(
-      data.results.map(async (item: { url: string }) => {
-        const pokemonAttributes = await getPokemon(item.url);
-        return pokemonAttributes;
-      }),
-    );
+  const pokemons = await Promise.all(
+    data.results.map(async (item: { url: string }) => {
+      const pokemonAttributes = await getPokemon(item.url);
+      return pokemonAttributes;
+    }),
+  );
 
-    return pokemons;
-  } else {
-    throw new Error(
-      "Invalid data format: results property is missing or not an array.",
-    );
-  }
+  return pokemons;
 }
