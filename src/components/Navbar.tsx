@@ -6,7 +6,6 @@ import { Button } from "./ui/button";
 function Navbar() {
   return (
     <nav className=" left-0 top-0 flex items-center gap-2 bg-muted/20 p-5 px-12 font-pixel ">
-      <Menu className="mt-1" />
       <Link href="/" className="   text-3xl font-bold">
         DiffinDex
       </Link>

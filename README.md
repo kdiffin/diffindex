@@ -1,3 +1,16 @@
+## Left to do:
+
+[] ADD EVOLUTION
+[] ADD TYPE EFFECTIVENESS
+[] ADD FORMS
+[] ADD MOVES
+[] ADD POKEDEX ENTRIES
+[] Add colors to badges based on type
+[] Add revalidation based on if fetch changes
+[] Add responsive to pokemon page
+[] Make React Native app
+[] Delve into other API endpoints like moves/types etc.
+
 this project was initially started because of a school project i had to submit
 alright so this is my attempt to work with the pokeapi using next13
 

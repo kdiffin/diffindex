@@ -5,10 +5,9 @@ import { Separator } from "../../../../components/ui/separator";
 import { capitalizeFirstLetter, formatOrder } from "~/lib/utils";
 import Link from "next/link";
 import Image from "next/image";
-import PokemonMoves from "~/components/fetches/PokemonMoves";
+import PokemonMoves from "~/components/moves/PokemonMoves";
 
 async function page({ params }: { params: { pokemon: string } }) {
-  // LEFT TO DO: ADD EVOLUTION,  ADD TYPE EFFECTIVENESS, ADD FORMS, ADD MOVES, ADD POKEDEX ENTRIES
   const pokemon = await getPokemon(
     "https://pokeapi.co/api/v2/pokemon/" + params.pokemon,
   );
@@ -103,11 +102,7 @@ async function page({ params }: { params: { pokemon: string } }) {
           pokemonName={pokemonName}
         />
 
-        <PokemonMoves
-          moves={moves}
-          pokemon={pokemon}
-          pokemonName={pokemonName}
-        />
+        <PokemonMoves pokemon={pokemon} pokemonName={pokemonName} />
       </div>
     </div>
   );
