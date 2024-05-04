@@ -15,6 +15,11 @@ function SearchPokemon() {
   const inputRef = useRef<HTMLInputElement>(null);
 
   function updateSearch(searchValue: string) {
+    if (searchValue.length === 0) {
+      router.push("/");
+      return;
+    }
+
     if (searchValue.length > 1) {
       router.push("/search/" + searchValue.toLowerCase());
       return;
