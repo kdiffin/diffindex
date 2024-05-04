@@ -5,7 +5,7 @@ import { Separator } from "../../../../components/ui/separator";
 import { capitalizeFirstLetter, formatOrder } from "~/lib/utils";
 import Link from "next/link";
 import Image from "next/image";
-import PokemonMoves from "~/components/PokemonMoves";
+import PokemonMoves from "~/components/fetches/PokemonMoves";
 
 async function page({ params }: { params: { pokemon: string } }) {
   // LEFT TO DO: ADD EVOLUTION,  ADD TYPE EFFECTIVENESS, ADD FORMS, ADD MOVES, ADD POKEDEX ENTRIES

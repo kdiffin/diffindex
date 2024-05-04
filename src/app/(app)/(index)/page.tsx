@@ -3,7 +3,7 @@ import SearchIndex from "~/components/SearchIndex";
 import IndexPokemon, {
   SearchIndexFallback,
   SkeletonIndex,
-} from "~/components/fetches/IndexPokemon";
+} from "~/components/fetches/PokemonGrid";
 
 export default async function HomePage({
   searchParams,

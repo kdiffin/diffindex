@@ -96,7 +96,7 @@ const PokemonCard = memo(function PokemonCard({
               </div>
             </div>
 
-            <h2 className=" -mx-6  -my-1 mt-2 border-y border-border/20 px-6 py-2 font-pixel text-2xl font-semibold capitalize text-accent ">
+            <h2 className=" -mx-6 -my-1 mt-2 line-clamp-1 border-y border-border/20 px-6 py-2 font-pixel text-2xl font-semibold capitalize text-accent ">
               {title}
             </h2>
           </CardContent>

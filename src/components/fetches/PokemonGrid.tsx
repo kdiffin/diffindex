@@ -7,7 +7,6 @@ import { matchSorter } from "match-sorter";
 import SearchIndex from "../SearchIndex";
 import { Search } from "lucide-react";
 import { Input } from "../ui/input";
-import ClientCards from "../ClientCards";
 
 async function IndexPokemon() {
   const data = await getAllPokemon();
@@ -34,6 +33,35 @@ async function IndexPokemon() {
   );
 }
 
+export async function SearchComponent({
+  searchParams,
+}: {
+  searchParams: string;
+}) {
+  const data = await getAllPokemon();
+
+  const filteredArray = data.filter((pokemon) =>
+    pokemon.name.toLowerCase().includes(searchParams ?? ""),
+  );
+
+  const optimizedArray = filteredArray.map((pokemon) => {
+    return (
+      <PokemonCard
+        abilities={pokemon.abilities}
+        key={pokemon.id}
+        index={formatOrder(pokemon.id)}
+        title={pokemon.name}
+        types={pokemon.types}
+        imageHref={
+          pokemon.sprites?.front_default ? pokemon.sprites?.front_default : ""
+        }
+      />
+    ); // This will return each item
+  });
+
+  return <>{optimizedArray}</>;
+}
+
 export function SkeletonIndex() {
   const skeletonArray = new Array(20).fill("");
   return (
@@ -42,7 +70,7 @@ export function SkeletonIndex() {
         return (
           <Skeleton
             key={i}
-            className="h-[436px] w-full sm:w-[38%] lg:w-[30%]   "
+            className="h-[510px] w-full sm:w-[38%] lg:w-[30%]   "
           />
         );
       })}

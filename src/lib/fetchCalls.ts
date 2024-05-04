@@ -4,6 +4,7 @@ import { type PokeAPI } from "pokeapi-types";
 export async function getPokemonNamesAndURLs() {
   const res = await fetch(
     `https://pokeapi.co/api/v2/pokemon?limit=200000&offset=0`,
+    { cache: "force-cache" },
   );
   if (!res.ok) {
     // This will activate the closest `error.js` Error Boundary

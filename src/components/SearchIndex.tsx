@@ -15,9 +15,7 @@ function SearchIndex() {
   const inputRef = useRef<HTMLInputElement>(null);
 
   function updateSorting(searchValue: string) {
-    const params = new URLSearchParams(searchParams.toString());
-    params.set("q", searchValue);
-    window.history.replaceState(null, "", `?${params.toString()}`);
+    router.push("/search/" + searchValue);
   }
 
   return (
