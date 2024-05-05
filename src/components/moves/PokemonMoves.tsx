@@ -12,8 +12,14 @@ const PokemonMoves: React.FC<MovesProps> = async ({ pokemon, pokemonName }) => {
       <p className="mb-3 font-light italic text-zinc-800">
         Below is a table of all the moves this pokemon has
       </p>
-
-      <DataTable  columns={columns} data={moves} />
+      <div className=" hidden lg:block">
+        <DataTable columns={columns} data={moves} />
+      </div>
+      <div className="flex min-h-40 items-center justify-center lg:hidden">
+        <p className="text-center text-muted-foreground">
+          Sorry, feature not available on small devices
+        </p>
+      </div>
     </div>
   );
 };
