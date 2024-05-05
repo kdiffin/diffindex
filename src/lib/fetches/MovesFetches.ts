@@ -36,11 +36,13 @@ export async function getPokemonMoves(
   return usefulAttributes;
 }
 
-export type Moves = {
+export type Moves = Move[];
+
+export type Move = {
   accuracy: number;
   power: number;
   type: string;
   name: string;
   category: string;
   pp: number;
-}[];
+};

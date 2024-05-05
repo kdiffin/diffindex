@@ -13,10 +13,11 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "~/components/ui/dropdown-menu";
+import { type Move } from "~/lib/fetches/MovesFetches";
 // This type is used to define the shape of our data.
 // You can use a Zod schema here if you want.
 
-export const columns: ColumnDef<PokeAPI.Move>[] = [
+export const columns: ColumnDef<Move>[] = [
   {
     accessorKey: "level",
     header: "Level",
