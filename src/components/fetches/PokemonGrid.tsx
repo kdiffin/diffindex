@@ -44,8 +44,10 @@ export async function SearchPokemonCards({
 }) {
   const pokemonNames = await getPokemonNamesAndURLs();
 
-  const filteredFetches = pokemonNames.results.filter((pokemon) =>
-    pokemon.name.toLowerCase().includes(searchParams ?? ""),
+  const filteredFetches = matchSorter(
+    pokemonNames.results,
+    searchParams ?? "",
+    { keys: ["name"] },
   );
 
   const pokemons = await Promise.all(
