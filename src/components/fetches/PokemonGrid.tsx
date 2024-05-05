@@ -9,7 +9,7 @@ import { Skeleton } from "../ui/skeleton";
 import { formatOrder } from "~/lib/utils";
 import { matchSorter } from "match-sorter";
 import SearchPokemon from "../SearchPokemon";
-import { Search } from "lucide-react";
+import { Divide, Search } from "lucide-react";
 import { Input } from "../ui/input";
 
 async function IndexPokemonCards() {
@@ -75,7 +75,17 @@ export async function SearchPokemonCards({
     ); // This will return each item
   });
 
-  return <>{optimizedArray}</>;
+  return (
+    <>
+      {optimizedArray.length > 0 ? (
+        optimizedArray
+      ) : (
+        <span className=" place-items-center text-center text-2xl  italic text-muted-foreground">
+          No such pokemon...
+        </span>
+      )}
+    </>
+  );
 }
 
 export function PokemonCardsSkeleton() {
