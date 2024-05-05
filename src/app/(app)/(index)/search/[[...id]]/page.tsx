@@ -3,7 +3,7 @@ import IndexPokemonCards, {
   SearchPokemonCards,
   PokemonCardsSkeleton,
 } from "~/components/fetches/PokemonGrid";
-import { getAllPokemon } from "~/lib/fetchCalls";
+import { getAllPokemon } from "~/lib/fetches/PokemonFetches";
 
 async function page({ params }: { params: { id: string } }) {
   return (

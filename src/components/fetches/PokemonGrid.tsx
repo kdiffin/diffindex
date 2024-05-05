@@ -3,7 +3,7 @@ import {
   getAllPokemon,
   getPokemon,
   getPokemonNamesAndURLs,
-} from "~/lib/fetchCalls";
+} from "~/lib/fetches/PokemonFetches";
 import PokemonCard from "../PokemonCard";
 import { Skeleton } from "../ui/skeleton";
 import { formatOrder } from "~/lib/utils";

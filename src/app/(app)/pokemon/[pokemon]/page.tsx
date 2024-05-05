@@ -1,6 +1,6 @@
 import React from "react";
 import { Badge } from "~/components/ui/badge";
-import { getPokemon } from "~/lib/fetchCalls";
+import { getPokemon } from "~/lib/fetches/PokemonFetches";
 import { Separator } from "../../../../components/ui/separator";
 import { capitalizeFirstLetter, formatOrder } from "~/lib/utils";
 import Link from "next/link";
@@ -109,6 +109,10 @@ async function page({ params }: { params: { pokemon: string } }) {
 }
 
 const PokemonStats: React.FC<Props> = ({ stats, pokemon, pokemonName }) => {
+  const statTotal = stats.reduce((accumulator, currentValue) => {
+    return accumulator + currentValue.value;
+  }, 0);
+
   return (
     <div className="h-full max-w-2xl rounded-md bg-background/20 p-8 shadow-md">
       <h2 className=" text-2xl font-semibold">{pokemonName}'s Stats</h2>
@@ -128,7 +132,7 @@ const PokemonStats: React.FC<Props> = ({ stats, pokemon, pokemonName }) => {
             <th className="py-2"></th>
           </tr>
         </thead>
-        <tbody>
+        <tbody className="">
           {stats.map((stat, index) => {
             // Determine the background color based on the stat name
             let bgColorClass = "";
@@ -172,15 +176,30 @@ const PokemonStats: React.FC<Props> = ({ stats, pokemon, pokemonName }) => {
                   </div>
                   <div>{stat.value}</div>
                 </th>
-                <td className={` ${index % 2 === 0 ? "w-full" : "w-full "}`}>
+                <td className={` w-full `}>
                   <div
-                    className={`${bgColorClass} h-4 rounded-full`}
+                    className={`${bgColorClass} h-3  rounded-full pr-4`}
                     style={{ width: `${(stat.value / 255) * 100}%` }}
                   ></div>
                 </td>
               </tr>
             );
           })}
+
+          <tr className={"rounded-b-md bg-background/20  "}>
+            <th className="flex justify-between   px-4 py-2 font-semibold">
+              {" "}
+              <div>Total</div>
+              <div>{statTotal}</div>
+            </th>
+
+            <td className={` w-full pr-4   `}>
+              <div
+                className={`h-3 rounded-full bg-teal-500 `}
+                style={{ width: `${(statTotal / 780) * 100}%` }}
+              ></div>
+            </td>
+          </tr>
         </tbody>
       </table>
     </div>

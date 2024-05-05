@@ -2,7 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer utilities {
+  .tableheader:has(span) {
+    max-width: 10px;
+  }
+}
+
 @layer base {
+  .tableheader:has(span) {
+    max-width: 10px;
+  }
   :root {
     --background: 0 0% 100%;
     --foreground: 240 10% 3.9%;
@@ -36,9 +45,7 @@
   }
 
   body {
-    background-image: url("../../public/wallpaper.jpg");
-    background-repeat: no-repeat;
-    background-size: cover;
+    background-color: white;
   }
 
   body:before {

@@ -1,4 +1,4 @@
-import "~/styles/globals.css";
+import "../../styles/globals.css";
 import { Inter, Pixelify_Sans as Pixel } from "next/font/google";
 import Navbar from "~/components/Navbar";
 import { AppProgressBar as ProgressBar } from "next-nprogress-bar";
