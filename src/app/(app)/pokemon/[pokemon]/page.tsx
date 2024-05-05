@@ -88,11 +88,7 @@ async function page({ params }: { params: { pokemon: string } }) {
       </p>{" "}
       <div className="flex  items-center gap-1">
         {pokemon.types.map((type) => {
-          return (
-            <TypeBadge key={type.slot} className="capitalize ">
-              {type.type.name}
-            </TypeBadge>
-          );
+          return <TypeBadge key={type.slot}>{type.type.name}</TypeBadge>;
         })}
       </div>
       <div className="mt-4 grid justify-center gap-4 lg:grid-cols-2 lg:justify-normal">
