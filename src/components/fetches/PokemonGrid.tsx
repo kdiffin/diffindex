@@ -47,7 +47,10 @@ export async function SearchPokemonCards({
   const filteredFetches = matchSorter(
     pokemonNames.results,
     searchParams ?? "",
-    { keys: ["name"] },
+    {
+      keys: [(item) => item.name.replace(/-/g, " ")],
+      threshold: matchSorter.rankings.CONTAINS,
+    },
   );
 
   const pokemons = await Promise.all(

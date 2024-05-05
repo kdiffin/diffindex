@@ -20,7 +20,7 @@ function SearchPokemon() {
       return;
     }
 
-    if (searchValue.length > 2) {
+    if (searchValue.length > 1) {
       router.push("/search/" + searchValue.toLowerCase());
       return;
     }
