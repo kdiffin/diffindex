@@ -2,6 +2,7 @@ import { type PokeAPI } from "pokeapi-types";
 import { DataTable } from "./data-table";
 import { columns } from "./columns";
 import { getPokemonMoves } from "~/lib/fetches/MovesFetches";
+import { Skeleton } from "../ui/skeleton";
 
 const PokemonMoves: React.FC<MovesProps> = async ({ pokemon, pokemonName }) => {
   const moves = await getPokemonMoves(pokemon.moves);
@@ -12,6 +13,7 @@ const PokemonMoves: React.FC<MovesProps> = async ({ pokemon, pokemonName }) => {
       <p className="mb-3 font-light italic text-zinc-800">
         Below is a table of all the moves this pokemon has
       </p>
+
       <div className=" hidden lg:block">
         <DataTable columns={columns} data={moves} />
       </div>
@@ -23,6 +25,12 @@ const PokemonMoves: React.FC<MovesProps> = async ({ pokemon, pokemonName }) => {
     </div>
   );
 };
+
+export function PokemonMovesSuspense() {
+  return (
+    <Skeleton className="h-[600px]  rounded-md  p-8 lg:col-span-2"></Skeleton>
+  );
+}
 
 type MovesProps = {
   pokemon: PokeAPI.Pokemon;

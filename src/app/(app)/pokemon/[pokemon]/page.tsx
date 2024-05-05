@@ -1,18 +1,19 @@
-import React from "react";
+import React, { Suspense } from "react";
 import { Badge } from "~/components/ui/badge";
 import { getPokemon } from "~/lib/fetches/PokemonFetches";
 import { Separator } from "../../../../components/ui/separator";
 import { capitalizeFirstLetter, formatOrder } from "~/lib/utils";
 import Link from "next/link";
 import Image from "next/image";
-import PokemonMoves from "~/components/moves/PokemonMoves";
+import PokemonMoves, {
+  PokemonMovesSuspense,
+} from "~/components/moves/PokemonMoves";
 
 async function page({ params }: { params: { pokemon: string } }) {
   const pokemon = await getPokemon(
     "https://pokeapi.co/api/v2/pokemon/" + params.pokemon,
   );
   const pokemonName = capitalizeFirstLetter(pokemon.name);
-  const moves = pokemon.moves;
 
   const stats: Stat[] = pokemon.stats.map((stat) => {
     return {
@@ -101,8 +102,9 @@ async function page({ params }: { params: { pokemon: string } }) {
           pokemon={pokemon}
           pokemonName={pokemonName}
         />
-
-        <PokemonMoves pokemon={pokemon} pokemonName={pokemonName} />
+        <Suspense fallback={<PokemonMovesSuspense />}>
+          <PokemonMoves pokemon={pokemon} pokemonName={pokemonName} />
+        </Suspense>
       </div>
     </div>
   );

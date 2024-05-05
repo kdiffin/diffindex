@@ -2,7 +2,7 @@ import "server-only";
 import { type PokeAPI } from "pokeapi-types";
 
 export async function getMove(moveURL: string) {
-  const res = await fetch(moveURL);
+  const res = await fetch(moveURL, { cache: "no-cache" });
 
   if (!res.ok) {
     // This will activate the closest `error.js` Error Boundary
