@@ -14,6 +14,7 @@ import {
 import Link from "next/link";
 import { useInView } from "react-intersection-observer";
 import { type PokeAPI } from "pokeapi-types";
+import TypeBadge from "./TypeBadge";
 
 const PokemonCard = memo(function PokemonCard({
   title,
@@ -31,11 +32,7 @@ const PokemonCard = memo(function PokemonCard({
   const [ref, inView, entry] = useInView();
 
   const pokemonTypes = types.map((type, i) => {
-    return (
-      <Badge key={i} className="min-w-fit  uppercase">
-        {type.type.name}
-      </Badge>
-    );
+    return <TypeBadge key={i}>{type.type.name}</TypeBadge>;
   });
 
   const pokemonAbilities = abilities.map((ability, i) => {

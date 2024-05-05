@@ -1,5 +1,5 @@
 import React, { Suspense } from "react";
-import { Badge } from "~/components/ui/badge";
+import TypeBadge from "~/components/TypeBadge";
 import { getPokemon } from "~/lib/fetches/PokemonFetches";
 import { Separator } from "../../../../components/ui/separator";
 import { capitalizeFirstLetter, formatOrder } from "~/lib/utils";
@@ -8,6 +8,7 @@ import Image from "next/image";
 import PokemonMoves, {
   PokemonMovesSuspense,
 } from "~/components/moves/PokemonMoves";
+import { Badge } from "~/components/ui/badge";
 
 async function page({ params }: { params: { pokemon: string } }) {
   const pokemon = await getPokemon(
@@ -88,9 +89,9 @@ async function page({ params }: { params: { pokemon: string } }) {
       <div className="flex  items-center gap-1">
         {pokemon.types.map((type) => {
           return (
-            <Badge key={type.slot} className="capitalize ">
+            <TypeBadge key={type.slot} className="capitalize ">
               {type.type.name}
-            </Badge>
+            </TypeBadge>
           );
         })}
       </div>
