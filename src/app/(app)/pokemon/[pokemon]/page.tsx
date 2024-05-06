@@ -1,6 +1,9 @@
 import React, { Suspense } from "react";
 import TypeBadge from "~/components/TypeBadge";
-import { getPokemon } from "~/lib/fetches/PokemonFetches";
+import {
+  getPokemon,
+  getPokemonPreviousAndNext,
+} from "~/lib/fetches/PokemonFetches";
 import { Separator } from "../../../../components/ui/separator";
 import { capitalizeFirstLetter, formatOrder } from "~/lib/utils";
 import Link from "next/link";
@@ -9,11 +12,21 @@ import PokemonMoves, {
   PokemonMovesSuspense,
 } from "~/components/moves/PokemonMoves";
 import { Badge } from "~/components/ui/badge";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import { Button } from "~/components/ui/button";
+import {
+  NextPokemonLink,
+  NextPokemonSkeleton,
+  PreviousPokemonLink,
+  PreviousPokemonSkeleton,
+} from "~/components/sprites/PokemonNav";
+import PokemonSprites from "~/components/sprites/PokemonSprites";
 
 async function page({ params }: { params: { pokemon: string } }) {
   const pokemon = await getPokemon(
     "https://pokeapi.co/api/v2/pokemon/" + params.pokemon,
   );
+
   const pokemonName = capitalizeFirstLetter(pokemon.name);
 
   const stats: Stat[] = pokemon.stats.map((stat) => {
@@ -23,82 +36,51 @@ async function page({ params }: { params: { pokemon: string } }) {
     };
   });
 
-  function PokemonSprite() {
-    const imageHref = pokemon.sprites?.front_default
-      ? pokemon.sprites.front_default
-      : "No Image Yet";
-    const imageHref2 = pokemon.sprites?.back_default
-      ? pokemon.sprites?.back_default
-      : "No Image Yet";
-
-    return (
-      <div className="max-w-2xl rounded-md bg-background/20 p-8 shadow-md">
-        <h2 className=" text-2xl font-semibold">{pokemonName}'s Sprites</h2>
-
-        <div className="mt-1">
-          <Badge>Regular</Badge>{" "}
-          <Badge
-            variant={"secondary"}
-            className="pointer-events-none opacity-20"
-          >
-            Shiny
-          </Badge>
-        </div>
-
-        <div className="relative  flex  items-center justify-center gap-2 ">
-          <div>
-            <Image
-              height={250}
-              width={250}
-              unoptimized
-              src={imageHref}
-              className="      rounded-t-xl  object-cover"
-              alt="No Image Yet"
-            />
-            <p className="text-center italic text-zinc-800">
-              {" "}
-              Frontside view of {pokemonName}'s sprite
-            </p>
-          </div>
-          <div>
-            <Image
-              height={250}
-              unoptimized
-              width={250}
-              src={imageHref2}
-              className="  muted-foreground        rounded-t-xl  object-cover"
-              alt="No Image Yet"
-            />
-            <p className="text-center italic text-zinc-800">
-              {" "}
-              Backside view of {pokemonName}'s sprite
-            </p>
-          </div>
-        </div>
-      </div>
-    );
-  }
-
   return (
     <div className="container py-12 ">
-      <h1 className="text-5xl font-extrabold  capitalize">{pokemonName}</h1>
-      <Separator className="mb-3 mt-6" />
-      <p className="py-2 text-2xl font-semibold text-muted-foreground">
-        #{formatOrder(pokemon.id)}
-      </p>{" "}
-      <div className="flex  items-center gap-1">
-        {pokemon.types.map((type) => {
-          return <TypeBadge key={type.slot}>{type.type.name}</TypeBadge>;
-        })}
+      <div className="flex items-center gap-10 ">
+        <Suspense fallback={<PreviousPokemonSkeleton />}>
+          <PreviousPokemonLink pokemon={pokemon} pokemonName={pokemonName} />
+        </Suspense>
+
+        <div className="mt-0.5 flex items-center gap-2">
+          <div className=" mt-2 flex flex-col gap-1">
+            {pokemon.types.map((type) => {
+              return (
+                <TypeBadge
+                  key={type.slot}
+                  className="max-w-fit px-2 font-sans text-[8px] font-bold"
+                >
+                  {type.type.name}
+                </TypeBadge>
+              );
+            })}
+          </div>
+
+          <h1 className="text-5xl font-extrabold capitalize ">
+            {pokemonName}
+            <sub className="ml-1 text-lg text-zinc-600 ">
+              #{formatOrder(pokemon.id)}
+            </sub>
+          </h1>
+        </div>
+
+        <Suspense fallback={<NextPokemonSkeleton />}>
+          <NextPokemonLink pokemon={pokemon} pokemonName={pokemonName} />
+        </Suspense>
       </div>
+
+      <Separator className="mb-3 mt-6" />
+
       <div className="mt-4 grid justify-center gap-4 lg:grid-cols-2 lg:justify-normal">
-        <PokemonSprite />
+        <PokemonSprites pokemon={pokemon} pokemonName={pokemonName} />
 
         <PokemonStats
           stats={stats}
           pokemon={pokemon}
           pokemonName={pokemonName}
         />
+
         <Suspense fallback={<PokemonMovesSuspense />}>
           <PokemonMoves pokemon={pokemon} pokemonName={pokemonName} />
         </Suspense>

@@ -12,10 +12,10 @@ export function capitalizeFirstLetter(str: string): string {
   return str.charAt(0).toUpperCase() + str.slice(1);
 }
 
-export function formatOrder(id: number) {
-  if (id > 999) {
-    return ("000" + id).slice(-4);
+export function formatOrder(order: number) {
+  if (order > 999) {
+    return ("000" + order).slice(-4);
   }
 
-  return ("00" + id).slice(-3);
+  return ("00" + order).slice(-3);
 }

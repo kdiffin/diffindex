@@ -1,7 +1,7 @@
 import { Suspense } from "react";
 import IndexPokemonCards, {
   PokemonCardsSkeleton,
-} from "~/components/fetches/PokemonGrid";
+} from "~/components/Index/PokemonGrid";
 
 export default async function HomePage({
   searchParams,

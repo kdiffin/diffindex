@@ -38,21 +38,7 @@ export const columns: ColumnDef<Move>[] = [
       );
     },
   },
-  {
-    accessorKey: "pp",
-    header: ({ column }) => {
-      return (
-        <Button
-          className="justify-left -ml-4 text-left"
-          variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-        >
-          PP
-          <ArrowUpDown className="ml-2 h-4 w-4" />
-        </Button>
-      );
-    },
-  },
+
   {
     accessorKey: "category",
     header: ({ column }) => {

@@ -4,7 +4,7 @@ import { Inter, Pixelify_Sans as Pixel } from "next/font/google";
 import Navbar from "~/components/Navbar";
 import { Suspense } from "react";
 import SearchPokemon from "~/components/SearchPokemon";
-import { SearchPokemonFallback } from "~/components/fetches/PokemonGrid";
+import { SearchPokemonFallback } from "~/components/Index/PokemonGrid";
 
 const inter = Inter({
   subsets: ["latin"],

@@ -1,12 +1,18 @@
 import React from "react";
 import { Badge } from "./ui/badge";
 
-function TypeBadge({ children }: { children: string }) {
+function TypeBadge({
+  children,
+  className,
+}: {
+  children: string;
+  className?: string | undefined;
+}) {
   let bgColorClass = "";
 
   switch (children.toLowerCase()) {
     case "normal":
-      bgColorClass = "bg-gray-300";
+      bgColorClass = "bg-gray-300 text-black";
       break;
     case "fire":
       bgColorClass = "bg-red-500";
@@ -65,7 +71,10 @@ function TypeBadge({ children }: { children: string }) {
   }
 
   return (
-    <Badge className={`min-w-fit   uppercase  ${bgColorClass}`}>
+    <Badge
+      variant={"type"}
+      className={`min-w-fit  ${className}    uppercase  ${bgColorClass}`}
+    >
       {children}
     </Badge>
   );

@@ -2,7 +2,7 @@ import React, { Suspense } from "react";
 import IndexPokemonCards, {
   SearchPokemonCards,
   PokemonCardsSkeleton,
-} from "~/components/fetches/PokemonGrid";
+} from "~/components/Index/PokemonGrid";
 import { getAllPokemon } from "~/lib/fetches/PokemonFetches";
 
 async function page({ params }: { params: { id: string } }) {
