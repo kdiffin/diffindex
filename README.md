@@ -2,13 +2,14 @@
 
 - [] ADD EVOLUTION
 - [] ADD FORMS
-- [] ADD GOING FROM ONE POKEMON TO ANOTHER IN POKEMON PAGE
 - [] ADD SELECTIVE RETURNING TO getPokemon
 - [] ADD TYPE EFFECTIVENESS
 
+- [x] ADD GOING FROM ONE POKEMON TO ANOTHER IN POKEMON PAGE
+- [x] ADDED SHINY SELECT
 - [x] ADD MOVES
 - [x] Add colors to badges based on type
-- [] Add responsive to pokemon page
+- [x] Add responsive to pokemon page
 - [] Make React Native app
 - [] Delve into other API endpoints like moves/types etc.
 

@@ -39,24 +39,42 @@ export default function PokemonSprites({
     ? pokemon.sprites?.back_default
     : "No Image Yet";
 
+  const imageShinyHref = pokemon.sprites?.front_shiny
+    ? pokemon.sprites.front_shiny
+    : "No Image Yet";
+  const imageShinyHref2 = pokemon.sprites?.back_shiny
+    ? pokemon.sprites?.back_shiny
+    : "No Image Yet";
+
   return (
-    <div className="max-w-2xl rounded-md bg-background/20 p-8 shadow-md">
+    <div className="flex max-w-2xl flex-col rounded-md bg-background/20 p-8 shadow-md">
       <h2 className=" text-2xl font-semibold">{pokemonName}'s Sprites</h2>
 
-      <div className="mt-1">
-        <Badge>Regular</Badge>{" "}
-        <Badge variant={"secondary"} className="pointer-events-none opacity-20">
+      <div className="mt-1 flex items-center gap-2">
+        <Badge
+          onClick={() => setShinyToggle("default")}
+          className="cursor-pointer"
+          variant={shinyToggle === "default" ? "outline" : "default"}
+        >
+          Regular
+        </Badge>
+
+        <Badge
+          onClick={() => setShinyToggle("shiny")}
+          className="cursor-pointer"
+          variant={shinyToggle === "shiny" ? "outline" : "secondary"}
+        >
           Shiny
         </Badge>
       </div>
 
-      <div className="relative  flex  items-center justify-center gap-2 ">
+      <div className="relative flex flex-grow items-center  justify-center gap-2 py-2 ">
         <div>
           <Image
             height={250}
             width={250}
             unoptimized
-            src={imageHref}
+            src={shinyToggle === "default" ? imageHref : imageShinyHref}
             className="      rounded-t-xl  object-cover"
             alt="No Image Yet"
           />
@@ -65,12 +83,13 @@ export default function PokemonSprites({
             Frontside view of {pokemonName}'s sprite
           </p>
         </div>
+
         <div>
           <Image
             height={250}
             unoptimized
             width={250}
-            src={imageHref2}
+            src={shinyToggle === "default" ? imageHref2 : imageShinyHref2}
             className="  muted-foreground        rounded-t-xl  object-cover"
             alt="No Image Yet"
           />

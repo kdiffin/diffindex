@@ -13,8 +13,50 @@ import PokemonMoves, {
 import { Badge } from "~/components/ui/badge";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "~/components/ui/button";
-import { PokeAPI } from "pokeapi-types";
+import { type PokeAPI } from "pokeapi-types";
 import { Skeleton } from "../ui/skeleton";
+
+export default function PokemonNav({
+  pokemon,
+  pokemonName,
+}: {
+  pokemon: PokeAPI.Pokemon;
+  pokemonName: string;
+}) {
+  return (
+    <div className="flex items-center  gap-10   ">
+      <Suspense fallback={<PreviousPokemonSkeleton />}>
+        <PreviousPokemonLink pokemon={pokemon} pokemonName={pokemonName} />
+      </Suspense>
+
+      <div className="mt-0.5 flex items-center gap-2">
+        <div className=" mt-2 flex flex-col gap-1">
+          {pokemon.types.map((type) => {
+            return (
+              <TypeBadge
+                key={type.slot}
+                className="max-w-fit px-2 font-sans text-[8px] font-bold"
+              >
+                {type.type.name}
+              </TypeBadge>
+            );
+          })}
+        </div>
+
+        <h1 className="text-5xl font-extrabold capitalize ">
+          {pokemonName}
+          <sub className="ml-1 text-lg text-zinc-600 ">
+            #{formatOrder(pokemon.id)}
+          </sub>
+        </h1>
+      </div>
+
+      <Suspense fallback={<NextPokemonSkeleton />}>
+        <NextPokemonLink pokemon={pokemon} pokemonName={pokemonName} />
+      </Suspense>
+    </div>
+  );
+}
 
 export async function PreviousPokemonLink({
   pokemon,

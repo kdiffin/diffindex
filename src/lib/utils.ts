@@ -12,6 +12,13 @@ export function capitalizeFirstLetter(str: string): string {
   return str.charAt(0).toUpperCase() + str.slice(1);
 }
 
+export function convertToSnakeCase(text: string) {
+  return text
+    .split("-")
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join("_");
+}
+
 export function formatOrder(order: number) {
   if (order > 999) {
     return ("000" + order).slice(-4);

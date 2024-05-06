@@ -5,7 +5,11 @@ import {
   getPokemonPreviousAndNext,
 } from "~/lib/fetches/PokemonFetches";
 import { Separator } from "../../../../components/ui/separator";
-import { capitalizeFirstLetter, formatOrder } from "~/lib/utils";
+import {
+  capitalizeFirstLetter,
+  convertToSnakeCase,
+  formatOrder,
+} from "~/lib/utils";
 import Link from "next/link";
 import Image from "next/image";
 import PokemonMoves, {
@@ -14,13 +18,14 @@ import PokemonMoves, {
 import { Badge } from "~/components/ui/badge";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "~/components/ui/button";
-import {
+import PokemonNav, {
   NextPokemonLink,
   NextPokemonSkeleton,
   PreviousPokemonLink,
   PreviousPokemonSkeleton,
 } from "~/components/sprites/PokemonNav";
 import PokemonSprites from "~/components/sprites/PokemonSprites";
+import BackButton from "~/components/BackButton";
 
 async function page({ params }: { params: { pokemon: string } }) {
   const pokemon = await getPokemon(
@@ -36,43 +41,40 @@ async function page({ params }: { params: { pokemon: string } }) {
     };
   });
 
+  const pokemonAbilities = pokemon.abilities.map((ability, i) => {
+    return (
+      <>
+        <Link
+          target="_blank"
+          rel="noopener"
+          href={`https://bulbapedia.bulbagarden.net/wiki/${convertToSnakeCase(ability.ability.name)}_(Ability)`}
+        >
+          <Button
+            variant={"link"}
+            className="mt-0.5 min-w-fit px-1 pl-0  uppercase "
+          >
+            {ability.ability.name}
+          </Button>
+        </Link>
+
+        <span className="text-white "> / &nbsp;</span>
+      </>
+    );
+  });
+
   return (
     <div className="container py-12 ">
-      <div className="flex items-center gap-10 ">
-        <Suspense fallback={<PreviousPokemonSkeleton />}>
-          <PreviousPokemonLink pokemon={pokemon} pokemonName={pokemonName} />
-        </Suspense>
+      <PokemonNav pokemon={pokemon} pokemonName={pokemonName} />
 
-        <div className="mt-0.5 flex items-center gap-2">
-          <div className=" mt-2 flex flex-col gap-1">
-            {pokemon.types.map((type) => {
-              return (
-                <TypeBadge
-                  key={type.slot}
-                  className="max-w-fit px-2 font-sans text-[8px] font-bold"
-                >
-                  {type.type.name}
-                </TypeBadge>
-              );
-            })}
-          </div>
+      <Separator className="mb-3 mt-6 bg-background/60" />
 
-          <h1 className="text-5xl font-extrabold capitalize ">
-            {pokemonName}
-            <sub className="ml-1 text-lg text-zinc-600 ">
-              #{formatOrder(pokemon.id)}
-            </sub>
-          </h1>
+      <div className="mt-4 grid justify-center gap-4  lg:grid-cols-2 lg:justify-normal">
+        <div className="flex w-full flex-wrap justify-between rounded-md bg-background/20 p-4   lg:col-span-2">
+          <BackButton />
+
+          <span className=" relative text-sm  ">{pokemonAbilities}</span>
         </div>
 
-        <Suspense fallback={<NextPokemonSkeleton />}>
-          <NextPokemonLink pokemon={pokemon} pokemonName={pokemonName} />
-        </Suspense>
-      </div>
-
-      <Separator className="mb-3 mt-6" />
-
-      <div className="mt-4 grid justify-center gap-4 lg:grid-cols-2 lg:justify-normal">
         <PokemonSprites pokemon={pokemon} pokemonName={pokemonName} />
 
         <PokemonStats
@@ -149,7 +151,7 @@ const PokemonStats: React.FC<Props> = ({ stats, pokemon, pokemonName }) => {
                   <div>
                     <Link
                       target="_blank"
-                      href={`https://bulbapedia.bulbagarden.net/wiki/${stat.name}`}
+                      href={`https://bulbapedia.bulbagarden.net/wiki/${convertToSnakeCase(stat.name)}`}
                       className="mr-8 "
                     >
                       {stat.name}

@@ -15,6 +15,7 @@ import Link from "next/link";
 import { useInView } from "react-intersection-observer";
 import { type PokeAPI } from "pokeapi-types";
 import TypeBadge from "./TypeBadge";
+import { convertToSnakeCase } from "~/lib/utils";
 
 const PokemonCard = memo(function PokemonCard({
   title,
@@ -38,9 +39,17 @@ const PokemonCard = memo(function PokemonCard({
   const pokemonAbilities = abilities.map((ability, i) => {
     return (
       <>
-        <Button variant={"link"} className="min-w-fit px-1 pl-0 uppercase ">
-          {ability.ability.name}
-        </Button>
+        <Link
+          target="_blank"
+          rel="noopener"
+          href={`https://bulbapedia.bulbagarden.net/wiki/${convertToSnakeCase(ability.ability.name)}_(Ability)`}
+        >
+          {" "}
+          <Button variant={"link"} className="min-w-fit px-1 pl-0 uppercase ">
+            {ability.ability.name}
+          </Button>
+        </Link>
+
         <span className="text-foreground "> / &nbsp;</span>
       </>
     );
