@@ -10,7 +10,7 @@ import Link from "next/link";
 import Image from "next/image";
 import PokemonMoves, {
   PokemonMovesSuspense,
-} from "~/components/moves/PokemonMoves";
+} from "~/components/PokemonPage/moves/PokemonMoves";
 import { Badge } from "~/components/ui/badge";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "~/components/ui/button";

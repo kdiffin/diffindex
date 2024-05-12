@@ -20,6 +20,10 @@ export function convertToSnakeCase(text: string) {
 }
 
 export function formatOrder(order: number) {
+  if (order > 9999) {
+    return ("0000" + order).slice(-5);
+  }
+
   if (order > 999) {
     return ("000" + order).slice(-4);
   }

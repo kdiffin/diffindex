@@ -2,7 +2,7 @@ import { type PokeAPI } from "pokeapi-types";
 import { DataTable } from "./data-table";
 import { columns } from "./columns";
 import { getPokemonMoves } from "~/lib/fetches/MovesFetches";
-import { Skeleton } from "../ui/skeleton";
+import { Skeleton } from "../../ui/skeleton";
 
 const PokemonMoves: React.FC<MovesProps> = async ({ pokemon, pokemonName }) => {
   const moves = await getPokemonMoves(pokemon.moves);

@@ -14,18 +14,19 @@ import Link from "next/link";
 import Image from "next/image";
 import PokemonMoves, {
   PokemonMovesSuspense,
-} from "~/components/moves/PokemonMoves";
+} from "~/components/PokemonPage/moves/PokemonMoves";
 import { Badge } from "~/components/ui/badge";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "~/components/ui/button";
-import PokemonNav, {
-  NextPokemonLink,
-  NextPokemonSkeleton,
-  PreviousPokemonLink,
-  PreviousPokemonSkeleton,
-} from "~/components/sprites/PokemonNav";
-import PokemonSprites from "~/components/sprites/PokemonSprites";
+import PokemonNav from "~/components/PokemonPage/PokemonNav";
+import PokemonSprites from "~/components/PokemonPage/sprites/PokemonSprites";
 import BackButton from "~/components/BackButton";
+import PokemonEvolutionChain, {
+  PokemonEvolutionChainSkeleton,
+} from "~/components/PokemonPage/PokemonEvolutionChain";
+import PokemonForms, {
+  PokemonFormsSkeleton,
+} from "~/components/PokemonPage/PokemonForms";
 
 async function page({ params }: { params: { pokemon: string } }) {
   const pokemon = await getPokemon(
@@ -69,12 +70,14 @@ async function page({ params }: { params: { pokemon: string } }) {
       <Separator className="mb-3 mt-6 bg-background/60" />
 
       <div className="mt-4 grid justify-center gap-4  lg:grid-cols-2 lg:justify-normal">
+        {/* ROW 1 */}
         <div className="flex w-full flex-wrap justify-between rounded-md bg-background/20 p-4   lg:col-span-2">
           <BackButton />
 
           <span className=" relative text-sm  ">{pokemonAbilities}</span>
         </div>
 
+        {/* ROW 2 */}
         <PokemonSprites pokemon={pokemon} pokemonName={pokemonName} />
 
         <PokemonStats
@@ -83,6 +86,22 @@ async function page({ params }: { params: { pokemon: string } }) {
           pokemonName={pokemonName}
         />
 
+        {/* ROW 3 */}
+        <Suspense fallback={<PokemonEvolutionChainSkeleton />}>
+          <PokemonEvolutionChain pokemon={pokemon} />
+        </Suspense>
+
+        <Suspense
+          fallback={
+            <>
+              <PokemonFormsSkeleton />{" "}
+            </>
+          }
+        >
+          <PokemonForms pokemon={pokemon} pokemonName={pokemonName} />
+        </Suspense>
+
+        {/* ROW 4 */}
         <Suspense fallback={<PokemonMovesSuspense />}>
           <PokemonMoves pokemon={pokemon} pokemonName={pokemonName} />
         </Suspense>
@@ -97,7 +116,7 @@ const PokemonStats: React.FC<Props> = ({ stats, pokemon, pokemonName }) => {
   }, 0);
 
   return (
-    <div className="h-full max-w-2xl rounded-md bg-background/20 p-8 shadow-md">
+    <div className="col-span-1 h-full max-w-2xl rounded-md bg-background/20 p-8 shadow-md">
       <h2 className=" text-2xl font-semibold">{pokemonName}'s Stats</h2>
       <p className="mb-3 font-light italic text-zinc-800">
         These stats are non IV/EV trained, base stats at lvl 100.

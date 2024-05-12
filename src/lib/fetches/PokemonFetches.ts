@@ -14,13 +14,15 @@ export async function getPokemonNamesAndURLs() {
   return res.json() as Promise<PokeAPI.NamedAPIResourceList>;
 }
 
+// these  fetch for pokemon/id page
 export async function getPokemonPreviousAndNext(id: number) {
+  // make 2 fetches, one for the pokemon thats previous and one for the pokemon thats next
+  // ID is the pokedex order of the mon
   const res1 =
     id > 1
       ? await fetch("https://pokeapi.co/api/v2/pokemon/" + (id - 1))
       : undefined;
   const res2 = await fetch("https://pokeapi.co/api/v2/pokemon/" + (id + 1));
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
   const data1 = res1 ? ((await res1.json()) as PokeAPI.Pokemon) : undefined;
   const data2 = res2 ? ((await res2.json()) as PokeAPI.Pokemon) : undefined;
 
@@ -53,7 +55,6 @@ export async function getPokemonPreviousAndNext(id: number) {
   }
 }
 
-// fetch for pokemon/id page
 export async function getPokemon(pokemonURL: string) {
   const res = await fetch(pokemonURL);
 
@@ -65,7 +66,7 @@ export async function getPokemon(pokemonURL: string) {
   return res.json() as Promise<PokeAPI.Pokemon>;
 }
 
-//fetches for index page
+// these fetches for index page
 export async function getPokemonIndex(pokemonURL: string) {
   const data = await getPokemon(pokemonURL);
 
