@@ -27,7 +27,9 @@ import PokemonEvolutionChain, {
 import PokemonForms, {
   PokemonFormsSkeleton,
 } from "~/components/PokemonPage/Forms";
-import TypeEffectiveness from "~/components/PokemonPage/TypeEffectiveness";
+import TypeEffectiveness, {
+  PokemonTypeEffectivenessSkeleton,
+} from "~/components/PokemonPage/TypeEffectiveness";
 import PokemonTypeEffectiveness from "~/components/PokemonPage/TypeEffectiveness";
 
 async function page({ params }: { params: { pokemon: string } }) {
@@ -109,7 +111,7 @@ async function page({ params }: { params: { pokemon: string } }) {
         </Suspense>
 
         {/* ROW 5 */}
-        <Suspense fallback={<> </>}>
+        <Suspense fallback={<PokemonTypeEffectivenessSkeleton />}>
           <PokemonTypeEffectiveness
             pokemon={pokemon}
             pokemonName={pokemonName}

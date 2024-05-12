@@ -5,6 +5,7 @@ import getMultipliers from "~/lib/getMultipliers";
 import { Badge } from "../ui/badge";
 import { invertDefenseAttackObject } from "~/lib/utils";
 import TypeBadge from "../TypeBadge";
+import { Skeleton } from "../ui/skeleton";
 
 function PokemonTypeEffectiveness({
   pokemon,
@@ -91,6 +92,10 @@ function renderDefenseOrAttack(
   }
 
   return jsxElements;
+}
+
+export function PokemonTypeEffectivenessSkeleton() {
+  return <Skeleton className="col-span-1 h-full  min-h-[286px]" />;
 }
 
 export default PokemonTypeEffectiveness;
