@@ -6,6 +6,7 @@ import { Badge } from "../ui/badge";
 import { invertDefenseAttackObject } from "~/lib/utils";
 import TypeBadge from "../TypeBadge";
 import { Skeleton } from "../ui/skeleton";
+import { Separator } from "../ui/separator";
 
 function PokemonTypeEffectiveness({
   pokemon,
@@ -82,9 +83,10 @@ function renderDefenseOrAttack(
       jsxElements.push(
         <div
           key={`${category}-${key}`}
-          className="inline-flex items-center rounded-md bg-background/20 p-2 px-4 font-semibold"
+          className="inline-flex  items-center rounded-md bg-background/20 p-2 px-4 font-semibold"
         >
-          <p className="mr-2 text-lg font-semibold">{`${key}x:`}</p>
+          <p className="mr-2 w-10  text-lg font-semibold">{`${key}x:`}</p>
+          <Separator className=" mx-1 " orientation="vertical" />
           <div>{multiplierItems}</div>
         </div>,
       );
