@@ -14,17 +14,6 @@ export async function getPokemonNamesAndURLs() {
   return res.json() as Promise<PokeAPI.NamedAPIResourceList>;
 }
 
-export async function getPokemon(pokemonURL: string) {
-  const res = await fetch(pokemonURL);
-
-  if (!res.ok) {
-    // This will activate the closest `error.js` Error Boundary
-    throw new Error("Failed to fetch data");
-  }
-
-  return res.json() as Promise<PokeAPI.Pokemon>;
-}
-
 export async function getPokemonPreviousAndNext(id: number) {
   const res1 =
     id > 1
@@ -64,15 +53,50 @@ export async function getPokemonPreviousAndNext(id: number) {
   }
 }
 
-export async function getAllPokemon(): Promise<PokeAPI.Pokemon[]> {
+// fetch for pokemon/id page
+export async function getPokemon(pokemonURL: string) {
+  const res = await fetch(pokemonURL);
+
+  if (!res.ok) {
+    // This will activate the closest `error.js` Error Boundary
+    throw new Error("Failed to fetch data");
+  }
+
+  return res.json() as Promise<PokeAPI.Pokemon>;
+}
+
+//fetches for index page
+export async function getPokemonIndex(pokemonURL: string) {
+  const data = await getPokemon(pokemonURL);
+
+  return {
+    abilities: data.abilities,
+    name: data.name,
+    id: data.id,
+    order: data.order,
+    sprites: data.sprites,
+    types: data.types,
+  };
+}
+
+export async function getAllPokemon(): Promise<GetAllPokemon[]> {
   const data = await getPokemonNamesAndURLs();
 
   const pokemons = await Promise.all(
     data.results.map(async (item: { url: string }) => {
-      const pokemonAttributes = await getPokemon(item.url);
+      const pokemonAttributes = await getPokemonIndex(item.url);
       return pokemonAttributes;
     }),
   );
 
   return pokemons;
 }
+
+type GetAllPokemon = {
+  abilities: PokeAPI.PokemonAbility[];
+  name: string;
+  id: number;
+  order: number;
+  sprites: PokeAPI.PokemonSprites;
+  types: PokeAPI.PokemonType[];
+};

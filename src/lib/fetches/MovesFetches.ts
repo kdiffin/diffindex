@@ -3,13 +3,21 @@ import { type PokeAPI } from "pokeapi-types";
 
 export async function getMove(moveURL: string) {
   const res = await fetch(moveURL, { cache: "no-cache" });
+  const data = (await res.json()) as PokeAPI.Move;
 
   if (!res.ok) {
     // This will activate the closest `error.js` Error Boundary
     throw new Error("Failed to fetch data");
   }
 
-  return res.json() as Promise<PokeAPI.Move>;
+  return {
+    accuracy: data.accuracy,
+    power: data.power,
+    type: data.type.name,
+    name: data.name,
+    category: data.damage_class.name,
+    pp: data.pp,
+  };
 }
 
 export async function getPokemonMoves(
@@ -23,14 +31,7 @@ export async function getPokemonMoves(
   );
 
   const usefulAttributes = fullMoves.map((move) => {
-    return {
-      accuracy: move.accuracy,
-      power: move.power,
-      type: move.type.name,
-      name: move.name,
-      category: move.damage_class.name,
-      pp: move.pp,
-    };
+    return move;
   });
 
   return usefulAttributes;

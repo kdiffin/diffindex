@@ -2,6 +2,7 @@ import React, { ReactNode, Suspense } from "react";
 import TypeBadge from "~/components/TypeBadge";
 import {
   getPokemon,
+  getPokemonNamesAndURLs,
   getPokemonPreviousAndNext,
 } from "~/lib/fetches/PokemonFetches";
 import { capitalizeFirstLetter, formatOrder } from "~/lib/utils";
@@ -57,7 +58,6 @@ export default function PokemonNav({
     </div>
   );
 }
-
 export async function PreviousPokemonLink({
   pokemon,
   pokemonName,
@@ -126,8 +126,12 @@ export async function NextPokemonLink({
 }
 export function PreviousPokemonSkeleton() {
   return (
-    <div className=" mt-2 flex  h-10 w-24 items-center">
+    <div className=" mt-2 flex  h-10  items-center">
       <ChevronLeft className="text-background/60 " />
+      <div className="space-y-1">
+        <Skeleton className="h-3  w-20" />
+        <Skeleton className="h-3  w-12" />
+      </div>
     </div>
   );
 }
@@ -135,6 +139,11 @@ export function PreviousPokemonSkeleton() {
 export function NextPokemonSkeleton() {
   return (
     <div className="ml-auto mt-2 flex  h-10  items-center">
+      <div className="space-y-1">
+        <Skeleton className="h-3  w-20" />
+        <Skeleton className="h-3  w-12" />
+      </div>
+
       <ChevronRight className="text-background/60 " />
     </div>
   );

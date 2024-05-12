@@ -2,7 +2,7 @@ import React, { Suspense } from "react";
 import TypeBadge from "~/components/TypeBadge";
 import {
   getPokemon,
-  getPokemonPreviousAndNext,
+  getPokemonNamesAndURLs,
 } from "~/lib/fetches/PokemonFetches";
 import { Separator } from "../../../../components/ui/separator";
 import {
