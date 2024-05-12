@@ -15,7 +15,6 @@ async function PokemonEvolutionChain({
   pokemon: PokeAPI.Pokemon;
 }) {
   const data = await getPokemonEvolutionChain(pokemon.name);
-  console.log(data);
 
   return (
     <div className="col-span-1  h-full max-w-2xl rounded-md bg-background/20 p-8 shadow-md">

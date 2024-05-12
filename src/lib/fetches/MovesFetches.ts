@@ -3,12 +3,11 @@ import { type PokeAPI } from "pokeapi-types";
 
 export async function getMove(moveURL: string) {
   const res = await fetch(moveURL, { cache: "no-cache" });
-  const data = (await res.json()) as PokeAPI.Move;
-
   if (!res.ok) {
     // This will activate the closest `error.js` Error Boundary
     throw new Error("Failed to fetch data");
   }
+  const data = (await res.json()) as PokeAPI.Move;
 
   return {
     accuracy: data.accuracy,

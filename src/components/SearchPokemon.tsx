@@ -25,7 +25,6 @@ function SearchPokemon() {
       return;
     }
 
-    console.log(searchValue.length);
 
     toast({
       title: "Not specific enough",

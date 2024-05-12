@@ -44,7 +44,7 @@ export default function PokemonNav({
           })}
         </div>
 
-        <h1 className="text-5xl font-extrabold capitalize ">
+        <h1 className="line-clamp-1 text-3xl font-extrabold capitalize sm:line-clamp-none sm:text-5xl ">
           {pokemonName}
           <sub className="ml-1 text-lg text-zinc-600 ">
             #{formatOrder(pokemon.id)}
@@ -77,7 +77,7 @@ export async function PreviousPokemonLink({
         variant={"link"}
         className="px-2 text-base italic text-muted-foreground  group-hover:text-white"
       >
-        <div className="mt-1 text-left">
+        <div className="mt-1 hidden text-left sm:block">
           <p className="capitalize">{navPokemon.previousMonData.name}</p>
           <p className="text-sm">
             {" "}
@@ -109,7 +109,7 @@ export async function NextPokemonLink({
         variant={"link"}
         className="px-2 text-base italic text-muted-foreground group-hover:text-white"
       >
-        <div className="mt-1 text-left">
+        <div className="mt-1 hidden text-left sm:block">
           <p className="capitalize">{navPokemon.nextMonData.name}</p>
           <p className="text-sm">
             {" "}

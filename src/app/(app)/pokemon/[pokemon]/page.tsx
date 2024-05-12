@@ -18,15 +18,17 @@ import PokemonMoves, {
 import { Badge } from "~/components/ui/badge";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "~/components/ui/button";
-import PokemonNav from "~/components/PokemonPage/PokemonNav";
-import PokemonSprites from "~/components/PokemonPage/sprites/PokemonSprites";
+import PokemonNav from "~/components/PokemonPage/Nav";
+import PokemonSprites from "~/components/PokemonPage/sprites/Sprites";
 import BackButton from "~/components/BackButton";
 import PokemonEvolutionChain, {
   PokemonEvolutionChainSkeleton,
-} from "~/components/PokemonPage/PokemonEvolutionChain";
+} from "~/components/PokemonPage/EvolutionChain";
 import PokemonForms, {
   PokemonFormsSkeleton,
-} from "~/components/PokemonPage/PokemonForms";
+} from "~/components/PokemonPage/Forms";
+import TypeEffectiveness from "~/components/PokemonPage/TypeEffectiveness";
+import PokemonTypeEffectiveness from "~/components/PokemonPage/TypeEffectiveness";
 
 async function page({ params }: { params: { pokemon: string } }) {
   const pokemon = await getPokemon(
@@ -104,6 +106,14 @@ async function page({ params }: { params: { pokemon: string } }) {
         {/* ROW 4 */}
         <Suspense fallback={<PokemonMovesSuspense />}>
           <PokemonMoves pokemon={pokemon} pokemonName={pokemonName} />
+        </Suspense>
+
+        {/* ROW 5 */}
+        <Suspense fallback={<> </>}>
+          <PokemonTypeEffectiveness
+            pokemon={pokemon}
+            pokemonName={pokemonName}
+          />
         </Suspense>
       </div>
     </div>

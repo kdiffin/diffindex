@@ -19,7 +19,7 @@ import {
   NextPokemonSkeleton,
   PreviousPokemonLink,
   PreviousPokemonSkeleton,
-} from "~/components/PokemonPage/PokemonNav";
+} from "~/components/PokemonPage/Nav";
 import { type PokeAPI } from "pokeapi-types";
 
 export default function PokemonSprites({

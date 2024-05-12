@@ -30,3 +30,33 @@ export function formatOrder(order: number) {
 
   return ("00" + order).slice(-3);
 }
+
+// todo: write comments for these
+type DefenseAttackObject = Record<string, Record<string, number>>;
+
+export function invertObject(
+  obj: Record<string, number>,
+): Record<number, string[]> {
+  const invertedObj: Record<number, string[]> = {};
+  for (const key in obj) {
+    const value = obj[key];
+    if (!invertedObj[value ? value : 0]) {
+      invertedObj[value ? value : 0] = [];
+    }
+
+    // @ts-expect-error ts false flag as it has been checked above (I think so atleast, may be an oversight on my part)
+    invertedObj[value ? value : 0].push(key);
+  }
+  return invertedObj;
+}
+
+export function invertDefenseAttackObject(
+  obj: DefenseAttackObject,
+): DefenseAttackObject {
+  const invertedObject: DefenseAttackObject = {};
+  for (const key in obj) {
+    // @ts-expect-error honestly dont know how to fix this in a ts circumstance
+    invertedObject[key] = invertObject(obj[key]);
+  }
+  return invertedObject;
+}
