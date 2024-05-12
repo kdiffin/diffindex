@@ -27,7 +27,7 @@ function PokemonTypeEffectiveness({
   const renderedAttack = renderDefenseOrAttack(multipliers, "attack");
 
   return (
-    <div className="col-span-2    rounded-md bg-background/20 p-8 shadow-md">
+    <div className=" col-span-1 w-full  rounded-md  bg-background/20 p-8 shadow-md lg:col-span-2">
       <h2 className=" text-2xl font-semibold">
         {pokemonName}'s Type Effectiveness
       </h2>
@@ -83,7 +83,7 @@ function renderDefenseOrAttack(
       jsxElements.push(
         <div
           key={`${category}-${key}`}
-          className="inline-flex  items-center rounded-md bg-background/20 p-2 px-4 font-semibold"
+          className="inline-flex  flex-wrap items-center rounded-md bg-background/20 p-2 px-4 font-semibold"
         >
           <p className="mr-2 w-10  text-lg font-semibold">{`${key}x:`}</p>
           <Separator className=" mx-1 " orientation="vertical" />

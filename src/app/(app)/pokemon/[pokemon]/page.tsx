@@ -80,21 +80,17 @@ async function page({ params }: { params: { pokemon: string } }) {
 
           <span className=" relative text-sm  ">{pokemonAbilities}</span>
         </div>
-
         {/* ROW 2 */}
         <PokemonSprites pokemon={pokemon} pokemonName={pokemonName} />
-
         <PokemonStats
           stats={stats}
           pokemon={pokemon}
           pokemonName={pokemonName}
         />
-
         {/* ROW 3 */}
         <Suspense fallback={<PokemonEvolutionChainSkeleton />}>
           <PokemonEvolutionChain pokemon={pokemon} />
         </Suspense>
-
         <Suspense
           fallback={
             <>
@@ -104,7 +100,6 @@ async function page({ params }: { params: { pokemon: string } }) {
         >
           <PokemonForms pokemon={pokemon} pokemonName={pokemonName} />
         </Suspense>
-
         {/* ROW 4 */}
         <Suspense fallback={<PokemonMovesSuspense />}>
           <PokemonMoves pokemon={pokemon} pokemonName={pokemonName} />
