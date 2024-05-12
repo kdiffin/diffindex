@@ -4,14 +4,14 @@
 - [x] ADD FORMS
 - [x] ADD SELECTIVE RETURNING TO getPokemon
 - [x] ADD TYPE EFFECTIVENESS
-- [] MAKE TAURI CLIENT
-- [] CHECK WHATS NEEDED
-
+- [x] MAKE TAURI CLIENT
 - [x] ADD GOING FROM ONE POKEMON TO ANOTHER IN POKEMON PAGE
 - [x] ADDED SHINY SELECT
 - [x] ADD MOVES
 - [x] Add colors to badges based on type
 - [x] Add responsive to pokemon page
+
+- [] CHECK WHATS NEEDED
 - [] Make React Native app
 - [] Delve into other API endpoints like moves/types etc.
 
