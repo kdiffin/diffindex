@@ -7,7 +7,7 @@ import { Button } from "../ui/button";
 import TypeBadge from "../TypeBadge";
 import Link from "next/link";
 import { Skeleton } from "../ui/skeleton";
-import { ArrowLeft, ArrowRight } from "lucide-react";
+import { ArrowDown, ArrowLeft, ArrowRight } from "lucide-react";
 
 async function PokemonEvolutionChain({
   pokemon,
@@ -21,7 +21,7 @@ async function PokemonEvolutionChain({
       <h2 className=" text-2xl font-semibold">Evolution Chain</h2>
 
       <div className="flex flex-col place-items-center py-3 ">
-        <div className="  flex items-center  ">
+        <div className="  flex flex-col items-center sm:flex-row  ">
           {data && data.length > 1 ? (
             data.map((item, index) => {
               const order = formatOrder(item.pokedexId);
@@ -35,9 +35,18 @@ async function PokemonEvolutionChain({
               });
 
               return (
-                <div key={item.pokedexId} className=" flex">
+                <div key={item.pokedexId} className="flex flex-col sm:flex-row">
                   {index > 0 ? (
-                    <ArrowRight className=" mx-4 mt-10" size={30} />
+                    <>
+                      <ArrowRight
+                        className="mx-4 mt-10 hidden sm:block"
+                        size={30}
+                      />
+                      <ArrowDown
+                        className=" mx-auto my-10 flex  sm:hidden"
+                        size={30}
+                      />
+                    </>
                   ) : (
                     <> </>
                   )}{" "}

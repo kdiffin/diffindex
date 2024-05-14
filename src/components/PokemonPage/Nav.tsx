@@ -44,7 +44,7 @@ export default function PokemonNav({
           })}
         </div>
 
-        <h1 className="line-clamp-1 text-3xl font-extrabold capitalize sm:line-clamp-none sm:text-5xl ">
+        <h1 className="max-w-24  text-wrap text-3xl font-extrabold capitalize sm:text-4xl md:max-w-none">
           {pokemonName}
           <sub className="ml-1 text-lg text-zinc-600 ">
             #{formatOrder(pokemon.id)}
@@ -126,7 +126,7 @@ export async function NextPokemonLink({
 }
 export function PreviousPokemonSkeleton() {
   return (
-    <div className=" mt-2 flex  h-10  items-center">
+    <div className=" mt-2 hidden h-10  items-center  sm:flex">
       <ChevronLeft className="text-background/60 " />
       <div className="space-y-1">
         <Skeleton className="h-3  w-20" />
@@ -138,7 +138,7 @@ export function PreviousPokemonSkeleton() {
 
 export function NextPokemonSkeleton() {
   return (
-    <div className="ml-auto mt-2 flex  h-10  items-center">
+    <div className="ml-auto mt-2 hidden h-10  items-center  sm:flex">
       <div className="space-y-1">
         <Skeleton className="h-3  w-20" />
         <Skeleton className="h-3  w-12" />
