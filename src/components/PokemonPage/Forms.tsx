@@ -18,10 +18,12 @@ async function PokemonForms({
   const data = await getPokemonForms(pokemon.name);
 
   return (
-    <div className="col-span-1  h-full max-w-2xl rounded-md bg-background/20 p-8 shadow-md">
+    <div className="subtle-scrollbar relative   min-w-full max-w-2xl overflow-auto rounded-md bg-background/20 p-8 pb-4 shadow-md">
+      {" "}
       <h2 className=" text-2xl font-semibold">{pokemonName}'s Forms</h2>
-      <div className="flex flex-col  items-center justify-center py-3 ">
-        <div className="  flex flex-col items-center sm:flex-row  ">
+      <div className="flex flex-col  justify-center  py-3 ">
+        {" "}
+        <div className=" mx-auto flex  flex-col items-center pt-6 sm:flex-row  ">
           {data && data.length > 1 ? (
             data.map((item, index) => {
               const pokemonName = capitalizeFirstLetter(item.name);
@@ -33,7 +35,7 @@ async function PokemonForms({
                 );
               });
 
-              return index < 3 ? (
+              return (
                 <div key={item.name} className="flex flex-col sm:flex-row">
                   {index > 0 ? (
                     <>
@@ -77,7 +79,7 @@ async function PokemonForms({
                     </div>
                   </Link>
                 </div>
-              ) : null;
+              );
             })
           ) : (
             <div className="grid h-[200px] flex-grow place-items-center">

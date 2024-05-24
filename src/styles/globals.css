@@ -44,6 +44,18 @@
     --radius: 0.5rem;
   }
 
+  /* DONT TOUCH THESE  */
+  /* Add a thumb */
+  .subtle-scrollbar::-webkit-scrollbar {
+    width: 6px;
+    height: 8px;
+  }
+
+  .subtle-scrollbar::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    @apply bg-background/20;
+  }
+
   body {
     background-color: white;
   }

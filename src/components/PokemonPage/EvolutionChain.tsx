@@ -7,7 +7,8 @@ import { Button } from "../ui/button";
 import TypeBadge from "../TypeBadge";
 import Link from "next/link";
 import { Skeleton } from "../ui/skeleton";
-import { ArrowDown, ArrowLeft, ArrowRight } from "lucide-react";
+import { ArrowDown, ArrowLeft, ArrowRight, Scroll } from "lucide-react";
+import { ScrollArea } from "../ui/scroll-area";
 
 async function PokemonEvolutionChain({
   pokemon,
@@ -17,11 +18,11 @@ async function PokemonEvolutionChain({
   const data = await getPokemonEvolutionChain(pokemon.name);
 
   return (
-    <div className="col-span-1  h-full max-w-2xl rounded-md bg-background/20 p-8 shadow-md">
-      <h2 className=" text-2xl font-semibold">Evolution Chain</h2>
+    <div className="subtle-scrollbar relative  min-w-full   overflow-auto rounded-md bg-background/20 p-8 pb-4 shadow-md">
+      <h2 className=" text-2xl font-semibold  ">Evolution Chain</h2>
 
-      <div className="flex flex-col place-items-center py-3 ">
-        <div className="  flex flex-col items-center sm:flex-row  ">
+      <div className="flex flex-col  justify-center py-3  pt-6 ">
+        <div className="mx-auto   flex flex-col  items-center sm:flex-row  ">
           {data && data.length > 1 ? (
             data.map((item, index) => {
               const order = formatOrder(item.pokedexId);

@@ -21,35 +21,40 @@ import {
   PreviousPokemonSkeleton,
 } from "~/components/PokemonPage/Nav";
 import { type PokeAPI } from "pokeapi-types";
+import maleIcon from "../../../../public/maleIcon.jpeg";
+import femaleIcon from "../../../../public/femaleIcon.jpeg";
 
-export default function PokemonSprites({
+function PokemonSpritesDisplay({
   pokemon,
   pokemonName,
 }: {
   pokemon: PokeAPI.Pokemon;
   pokemonName: string;
 }) {
-  const [shinyToggle, setShinyToggle] = useState<"default" | "shiny">(
-    "default",
-  );
-  const imageHref = pokemon.sprites?.front_default
-    ? pokemon.sprites.front_default
-    : "No Image Yet";
-  const imageHref2 = pokemon.sprites?.back_default
-    ? pokemon.sprites?.back_default
-    : "No Image Yet";
-
-  const imageShinyHref = pokemon.sprites?.front_shiny
-    ? pokemon.sprites.front_shiny
-    : "No Image Yet";
-  const imageShinyHref2 = pokemon.sprites?.back_shiny
-    ? pokemon.sprites?.back_shiny
-    : "No Image Yet";
+  const [genderToggle, setGenderToggle] = useState("male");
+  const [shinyToggle, setShinyToggle] = useState("default");
 
   return (
     <div className="flex max-w-2xl flex-col rounded-md bg-background/20 p-8 shadow-md">
-      <h2 className=" text-2xl font-semibold">{pokemonName}'s Sprites</h2>
-
+      <div className="flex items-center">
+        <h2 className="text-2xl font-semibold">{pokemonName}'s Sprites</h2>
+        <button onClick={() => setGenderToggle("male")} className="ml-2">
+          <Image unoptimized alt="male" src={maleIcon} width={13} height={17} />
+        </button>
+        <span className="pointer-events-none select-none px-1 text-sm text-accent">
+          {" "}
+          /{" "}
+        </span>
+        <button onClick={() => setGenderToggle("female")}>
+          <Image
+            unoptimized
+            alt="female"
+            src={femaleIcon}
+            width={13}
+            height={17}
+          />
+        </button>
+      </div>
       <div className="mt-1 flex items-center gap-2">
         <Badge
           onClick={() => setShinyToggle("default")}
@@ -58,7 +63,6 @@ export default function PokemonSprites({
         >
           Regular
         </Badge>
-
         <Badge
           onClick={() => setShinyToggle("shiny")}
           className="cursor-pointer"
@@ -67,38 +71,98 @@ export default function PokemonSprites({
           Shiny
         </Badge>
       </div>
-
-      <div className="relative flex flex-grow items-center  justify-center gap-2 py-2 ">
-        <div>
-          <Image
-            height={250}
-            width={250}
-            unoptimized
-            src={shinyToggle === "default" ? imageHref : imageShinyHref}
-            className="      rounded-t-xl  object-cover"
-            alt="No Image Yet"
-          />
-          <p className="text-center italic text-zinc-800">
-            {" "}
-            Frontside view of {pokemonName}'s sprite
-          </p>
-        </div>
-
-        <div>
-          <Image
-            height={250}
-            unoptimized
-            width={250}
-            src={shinyToggle === "default" ? imageHref2 : imageShinyHref2}
-            className="  muted-foreground        rounded-t-xl  object-cover"
-            alt="No Image Yet"
-          />
-          <p className="text-center italic text-zinc-800">
-            {" "}
-            Backside view of {pokemonName}'s sprite
-          </p>
-        </div>
-      </div>
+      <PokemonSprite
+        genderToggle={genderToggle}
+        shinyToggle={shinyToggle}
+        pokemon={pokemon}
+      />
     </div>
   );
 }
+
+const PokemonSprite = ({
+  genderToggle,
+  shinyToggle,
+  pokemon,
+}: {
+  genderToggle: string;
+  shinyToggle: string;
+  pokemon: PokeAPI.Pokemon;
+}) => {
+  const imageHref = pokemon.sprites?.front_default
+    ? pokemon.sprites.front_default
+    : "No Image Yet";
+  const imageHref2 = pokemon.sprites?.back_default
+    ? pokemon.sprites.back_default
+    : "No Image Yet";
+  const imageShinyHref = pokemon.sprites?.front_shiny
+    ? pokemon.sprites.front_shiny
+    : "No Image Yet";
+  const imageShinyHref2 = pokemon.sprites?.back_shiny
+    ? pokemon.sprites.back_shiny
+    : "No Image Yet";
+
+  const femaleImageHref = pokemon.sprites?.front_female
+    ? pokemon.sprites.front_female
+    : "No Image Yet";
+  const femaleImageHref2 = pokemon.sprites?.back_female
+    ? pokemon.sprites.back_female
+    : "No Image Yet";
+  const femaleImageShinyHref = pokemon.sprites?.front_shiny_female
+    ? pokemon.sprites.front_shiny_female
+    : "No Image Yet";
+  const femaleImageShinyHref2 = pokemon.sprites?.back_shiny_female
+    ? pokemon.sprites.back_shiny_female
+    : "No Image Yet";
+
+  const frontSprite =
+    shinyToggle === "default"
+      ? genderToggle === "male"
+        ? imageHref
+        : femaleImageHref
+      : genderToggle === "male"
+        ? imageShinyHref
+        : femaleImageShinyHref;
+
+  const backSprite =
+    shinyToggle === "default"
+      ? genderToggle === "male"
+        ? imageHref2
+        : femaleImageHref2
+      : genderToggle === "male"
+        ? imageShinyHref2
+        : femaleImageShinyHref2;
+
+  return (
+    <div className="relative flex flex-grow items-center justify-center gap-2 py-2">
+      <div>
+        <Image
+          height={250}
+          width={250}
+          unoptimized
+          src={frontSprite}
+          className="rounded-t-xl object-cover"
+          alt="No Image Yet"
+        />
+        <p className="text-center italic text-zinc-800">
+          Frontside view of {pokemon.name}'s sprite
+        </p>
+      </div>
+      <div>
+        <Image
+          height={250}
+          width={250}
+          unoptimized
+          src={backSprite}
+          className="rounded-t-xl object-cover"
+          alt="No Image Yet"
+        />
+        <p className="text-center italic text-zinc-800">
+          Backside view of {pokemon.name}'s sprite
+        </p>
+      </div>
+    </div>
+  );
+};
+
+export default PokemonSpritesDisplay;
