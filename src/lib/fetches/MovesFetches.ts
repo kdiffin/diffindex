@@ -1,4 +1,3 @@
-import "server-only";
 import { type PokeAPI } from "pokeapi-types";
 
 export async function getMove(moveURL: string) {
