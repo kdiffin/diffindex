@@ -1,18 +1,12 @@
 ## Left to do:
 
-- [x] ADD EVOLUTION
-- [x] ADD FORMS
-- [x] ADD SELECTIVE RETURNING TO getPokemon
-- [x] ADD TYPE EFFECTIVENESS
-- [x] MAKE TAURI CLIENT
-- [x] ADD GOING FROM ONE POKEMON TO ANOTHER IN POKEMON PAGE
-- [x] ADDED SHINY SELECT
-- [x] ADD MOVES
-- [x] Add colors to badges based on type
-- [x] Add responsive to pokemon page
-
-- [] CHECK WHATS NEEDED
+- [] INITIALIZE PRISMA
+- [] INITIALIZE CLERK
+- [] MAKE TEAM BUILDER A THING
+- [] MAYBE MOVE OVER TO SPA ARCHITECTURE IDK
 - [] Make React Native app
+
+- [] CHECK CHAT GPT MADE FUNCTIONS
 - [] Delve into other API endpoints like moves/types etc.
 
 this project was initially started because of a school project i had to submit

@@ -19,7 +19,7 @@ import {
 
 function Navbar() {
   const navItems = [
-    { name: "Home", href: "/home" },
+    { name: "Home", href: "/" },
     {
       name: "PokemonDB",
       href: "https://pokemondb.net/pokedex/scyther",

@@ -77,6 +77,7 @@ export async function getPokemonForms(pokemonName: string) {
   const varieties = await Promise.all(
     varietiesUrlsAndNames.map(async (item) => {
       const pokemonAttributes = await getPokemonIndex(item.pokemon.url);
+
       return {
         name: pokemonAttributes.name,
         sprite: pokemonAttributes.sprites.front_default,

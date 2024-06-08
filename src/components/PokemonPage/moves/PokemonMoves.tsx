@@ -20,7 +20,7 @@ function PokemonMoves({
   });
 
   return (
-    <div className="max-h-[600px] rounded-md bg-background/20 p-8 shadow-md lg:col-span-2">
+    <div className="h-full max-h-[600px] rounded-md bg-background/20 p-8 shadow-md lg:col-span-2">
       <h2 className=" text-2xl font-semibold">{pokemonName}'s Moves</h2>
       <p className="mb-3 font-light italic text-zinc-800">
         Below is a table of all the moves this pokemon has
